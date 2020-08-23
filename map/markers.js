@@ -1,42 +1,35 @@
 "use strict";
 
-      // This example requires the Drawing library. Include the libraries=drawing
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtnS3D3bvBjvrLTLJJOv8xftB5Ctdgeck&libraries=drawing">
-      function initMap() {
-        const map = new google.maps.Map(document.getElementById("map"), {
-          center: {
-            lat: -34.397,
-            lng: 150.644
-          },
-          zoom: 8
-        });
-        const drawingManager = new google.maps.drawing.DrawingManager({
-          drawingMode: google.maps.drawing.OverlayType.MARKER,
-          drawingControl: true,
-          drawingControlOptions: {
-            position: google.maps.ControlPosition.TOP_CENTER,
-            drawingModes: [
-              google.maps.drawing.OverlayType.MARKER,
-              google.maps.drawing.OverlayType.CIRCLE,
-              google.maps.drawing.OverlayType.POLYGON,
-              google.maps.drawing.OverlayType.POLYLINE,
-              google.maps.drawing.OverlayType.RECTANGLE
-            ]
-          },
-          markerOptions: {
-            icon:
-              "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
-          },
-          circleOptions: {
-            fillColor: "#ffff00",
-            fillOpacity: 1,
-            strokeWeight: 5,
-            clickable: false,
-            editable: true,
-            zIndex: 1
-          }
-        });
-        drawingManager.setMap(map);
-      }
+var resource = {
+  category: 'FOOD',
+  org_name: 'Bay Area Rescue Mission',
+  resource_name: 'dinner',
+  resource_street: '',
+  resource_notes: '',
+  longitude: -122.41414,
+  latitude: 37.784106,
+};
 
+function initMap() {
+  var resourceLatLng = {lat: resource.latitude, lng: resource.longitude};
+  var sfLatLng = {lat: 37.7749, lng: -122.4194 };
+  var myLatLng = {lat: -25.363, lng: 131.044 };
+  var toLatLng = {lat: 43.6532, lng: -79.3832 };
+
+//  var map = new google.maps.Map(document.getElementById('map'), {
+//    center: {lat: -122.4194, lng: 37.7749 },
+//    zoom: 4,
+//  });
+  
+   var map = new google.maps.Map(document.getElementById("map"),
+                                    {
+                                        center: sfLatLng,
+                                        zoom: 13
+                                    });
+  var marker = new google.maps.Marker({
+    position: resourceLatLng,
+    map: map,
+    icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
+    title: resource.resource_name
+  });
+}
