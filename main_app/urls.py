@@ -15,7 +15,7 @@ urlpatterns = [
     #      name='shoes_detail'),
 
 
-    # path('accounts/signup/', views.signup, name='signup'),
+    path('accounts/signup/', views.signup, name='signup'),
     path('resources/create/',
          views.ResourceCreate.as_view(),
          name='resources_create'),

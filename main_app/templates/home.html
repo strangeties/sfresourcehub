@@ -1,8 +1,23 @@
-{% extends 'base.html' %} {% block content %} {% load static %}
-<body id="bg">
-<div class = 'text'>
-<h1>SFResourceHub</h1>
-</body>
+{% extends 'base.html' %} {% block content %}
 
+<label> Are you looking for any of these resources? </label>
+<br />
+<select name="resource_catergory">
+  <option value="food">Food</option>
+  <option value="shelter">Shelter</option>
+  <option value="clothing">Clothing</option>
+  <option value="mental_health">Mental Health Services</option>
+  <option value="medical">Medical Assistance</option>
+  <option value="employment">Employment Aid</option>
+  <option value="recovery">Substance Abuse Recovery</option> </select
+><br />
+<form action="/resources">
+  <input type="submit" value="Yes!" />
+</form>
 
+<label> Are you an organization offering resources? </label>
+<br />
+<form action="/accounts/login">
+  <input type="submit" value="Yes!" />
+</form>
 {% endblock %}
