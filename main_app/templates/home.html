@@ -1,23 +1,121 @@
-{% extends 'base.html' %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SF Resource Hub</title>
+</head>
+<body>
+  {% extends 'base.html' %} {% block content %}
+  <div class="container text-center">
+    <img src="/static/images/sf.png" class="mt-2 mb-3 img-fluid" alt="golden gate bridge">
+    <h2>What Resources Do You Need?</h2>
+    <div class="buttons mt-3 mb-5">
+      <button type="button" class="btn btn-secondary">Food</button>
+      <button type="button" class="btn btn-secondary">Shelter</button>
+      <button type="button" class="btn btn-secondary">Clothing</button>
+      <button type="button" class="btn btn-secondary">Mental Health Services</button>
+      <br>
+      <button type="button" class="btn btn-secondary my-2">Career Assistance</button>
+      <button type="button" class="btn btn-secondary my-2">Medical Care</button>
+      <button type="button" class="btn btn-secondary my-2">Substance Abuse Recovery</button>
+    </div>
+    <div class="homepage-about">
+      <p>SF Resource Hub is a project that raises awareness and gathers resources in one centralized location
+        for those most in need. According to Wikipedia, the San Francisco Bay Area comprises nine northern California
+        counties
+        and contains four of the ten most expensive counties in the United States, Strong economic growth has created
+        hundreds
+        of thousands of new jobs, but coupled with severe restrictions on building new housing units, it has resulted in
+        an extreme
+        housing shortage which has driven rents to extremely high levels. From 2015 to 2017, the homeless population had
+        increased
+        by 15%.
+      </p>
+      <p>San Francisco has several thousand homeless, despite extensive efforts by city government to address the issue.
+        The dramatically larger prevalence of visible homelessness in the city (relative to other large US cities) is
+        widely
+        noted by visitors as well as residents, and as of 2018, is starting to impact the city's largest industry, tourism
+        (a $9 billion industry).
+      </p>
+      <p>The number of the people in poverty in the San Francisco Bay Area grew from 573,333 (8.6%) in 2000 to 668,876
+        (9.7%)
+        in 2006-2010.[8] While poverty rates vary greatly across the SF Bay area, in 2015, the Silicon Valley Institute
+        for
+        Regional Studies published that the poverty rate was 11.3%, having a slight downward trend from 12%; however, it
+        was
+        still above the historical average rate of 9%.
+      </p>
+      <p>As a way to help combat the housing crisis, SF Resource Hub was created to help individuals in need to get the
+        most
+        accurate and up-to-date information on events and provide them with free sources around the city. We partnered
+        with
+        non-profit organizations in San Francisco to to raise awareness
+      </p>
+    </div>
+    <h5 class="mt-5">Are you an organization offering resources?</h5>
+    <a class="btn btn-secondary my-2" href="/accounts/login" role="button">Yes!</a>
+    <div class="row m-1 align-items-center">
+      <div class="col-md m-1 text-center">
+        <img src="/static/images/family.png" width="400" class="img-fluid p-2" alt="photo">
+      </div>
+      <div class="col-md m-1 text-center">
+        <img src="/static/images/people.png" width="400" class="img-fluid p-2" alt="photo">
+      </div>
+    </div>
+    <div class="row m-1 align-items-center">
+      <div class="col-md m-1 text-center">
+        <iframe
+          width="450"
+          height="400"
+          frameborder="0" style="border:0"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDtnS3D3bvBjvrLTLJJOv8xftB5Ctdgeck
+          &q=San Francisco+CA" allowfullscreen>
+        </iframe>
+      </div>
+      <div class="col-md m-1">
+        <h1 class="display-4 text-uppercase text-center">Contact Us</h1>
+        <!-- contact form -->
+        <form action="/" method="post">
+          <div class="controls">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <input type="text" name="subject" class="form-control font-weight-light" placeholder="Subject" required>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input type="text" name="name" class="form-control font-weight-light" placeholder="Name" required>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input type="email" name="email" class="form-control font-weight-light" placeholder="Email" required>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <div class="form-group">
+                  <textarea name="message" class="form-control font-weight-light" rows="4" placeholder="Your message"
+                            required></textarea>
+                  <div class="help-block with-errors"></div>
+                </div>
+                <input type="submit" class="btn btn-submit bg-dark font-weight-light text-uppercase text-white m-1"
+                       value="Send Message">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+</body>
+</html>
 
-<label> Are you looking for any of these resources? </label>
-<br />
-<select name="resource_catergory">
-  <option value="food">Food</option>
-  <option value="shelter">Shelter</option>
-  <option value="clothing">Clothing</option>
-  <option value="mental_health">Mental Health Services</option>
-  <option value="medical">Medical Assistance</option>
-  <option value="employment">Employment Aid</option>
-  <option value="recovery">Substance Abuse Recovery</option> </select
-><br />
-<form action="/resources">
-  <input type="submit" value="Yes!" />
-</form>
-
-<label> Are you an organization offering resources? </label>
-<br />
-<form action="/accounts/login">
-  <input type="submit" value="Yes!" />
-</form>
-{% endblock %}

@@ -1,3 +1,0 @@
-Resource name(only visible to NGO / not visible to users), Organization, Category, Hrs, Link, Notes, Address, Phone
-
-Curbside Clothing, St.Anthony Foundation, Clothing, M, W, F 10AM-1: 30PM, https: // www.stanthonysf.org /, Curbside Pickup & Masks required, 121 Golden Gate Ave, (415) 241-2600
