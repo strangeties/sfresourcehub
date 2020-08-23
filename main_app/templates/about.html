@@ -1,6 +1,44 @@
-{% extends 'base.html' %} {% block content %}
-
-<h1>SFResourceHub</h1>
-<p id="mission">Our Mission</p>
-<ul></ul>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SF Resource Hub</title>
+</head>
+<body>
+  {% extends 'base.html' %} {% block content %}
+  <div class="container">
+    <div class="about">
+      <h1 class="my-3">About Us</h1>
+        <p>SF Resource Hub is a project that raises awareness and gathers resources in one centralized location
+            for those most in need. According to Wikipedia, the San Francisco Bay Area comprises nine northern California counties
+            and contains four of the ten most expensive counties in the United States, Strong economic growth has created hundreds
+            of thousands of new jobs, but coupled with severe restrictions on building new housing units, it has resulted in an extreme
+            housing shortage which has driven rents to extremely high levels. From 2015 to 2017, the homeless population had increased
+            by 15%.
+        </p>
+        <p>San Francisco has several thousand homeless, despite extensive efforts by city government to address the issue.
+            The dramatically larger prevalence of visible homelessness in the city (relative to other large US cities) is widely
+            noted by visitors as well as residents, and as of 2018, is starting to impact the city's largest industry, tourism (a $9 billion industry).
+        </p>
+        <p>The number of the people in poverty in the San Francisco Bay Area grew from 573,333 (8.6%) in 2000 to 668,876 (9.7%)
+            in 2006-2010.[8] While poverty rates vary greatly across the SF Bay area, in 2015, the Silicon Valley Institute for
+            Regional Studies published that the poverty rate was 11.3%, having a slight downward trend from 12%; however, it was
+            still above the historical average rate of 9%.
+        </p>
+        <p>As a way to help combat the housing crisis, SF Resource Hub was created to help individuals in need to get the most
+            accurate and up-to-date information on events and provide them with free sources around the city. We partnered with
+            non-profit organizations in San Francisco to to raise awareness
+        </p>
+    </div>
+    <div class="row m-1 align-items-center">
+      <div class="col-md m-1 text-center">
+        <img src="/static/images/city-hall.png" width="400" class="img-fluid p-2" alt="photo">
+      </div>
+      <div class="col-md m-1 text-center">
+        <img src="/static/images/street.png" width="400" class="img-fluid p-2" alt="photo">
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+</body>
+</html>
