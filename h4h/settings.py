@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'main_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -77,7 +78,7 @@ WSGI_APPLICATION = 'h4h.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'swapify',
+        'NAME': 'h4h',
     }
 }
 
@@ -120,7 +121,7 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-LOGIN_REDIRECT_URL = '/clothings/'
+LOGIN_REDIRECT_URL = '/resources/'
 
 LOGOUT_REDIRECT_URL = '/'
 
