@@ -23,7 +23,8 @@ def resources_index(request):
 
 class ResourceCreate(LoginRequiredMixin, CreateView):
     model = Resource
-    fields = ['org_name', 'category', 'link', 'notes']
+    fields = ['resource_name', 'org_name', 'category', 'hours',
+              'notes', 'street', 'city', 'state', 'phone', 'long', 'lat', 'url']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
