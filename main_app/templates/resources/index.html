@@ -1,11 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <title>SF Resource Hub</title>
+  <link rel="stylesheet" type="text/css" href="{% static "css/markers.css" %}">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtnS3D3bvBjvrLTLJJOv8xftB5Ctdgeck&callback=initMap&libraries=drawing&v=weekly"
+      defer></script>
+  <script>
+    const icons = [
+      "{% static "images/icons/food.gif" %}",
+      "{% static "images/icons/clothing.gif" %}",
+      "{% static "images/icons/addiction_recovery.gif" %}",
+      "{% static "images/icons/hygiene.gif" %}",
+      "{% static "images/icons/financial_empowerment.gif" %}",
+      "{% static "images/icons/shelter.gif" %}",
+      "{% static "images/icons/women_and_children.gif" %}",
+      "{% static "images/icons/mental_health.gif" %}",
+      "{% static "images/icons/financial_empowerment.gif" %}",
+      "{% static "images/icons/medical_assistance.gif" %}"
+    ];
+
+   const default_icon = "{% static "images/icons/default.gif" %}"
+  </script>
+  <script src="{% static "js/resources.js" %}"></script>
+  <script src="{% static "js/markers.js" %}"></script>
 </head>
 <body>
-  {% extends 'base.html' %} {% block content %}
   <div class="container">
     <h1>Resources</h1>
     {% for resource in resources %}
@@ -23,11 +49,10 @@
     {% endfor %}
   </div>
   <div id="map"></div>
-    <div>
-        <table id="resources">
-        </table>
-    </div>
+  <div>
+    <table id="resources">
+    </table>
+  </div>
   {% endblock %}
 </body>
 </html>
->>>>>>> master
