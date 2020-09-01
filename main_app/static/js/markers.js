@@ -15,6 +15,7 @@ const categories = [
     "Medical Assistance",
 ];
 
+<<<<<<< HEAD
 const icons = [
     "icons/food.gif",
     "icons/clothing.gif",
@@ -28,6 +29,8 @@ const icons = [
     "icons/medical_assistance.gif"
 ];
 
+=======
+>>>>>>> 85cc5e1be11c9306f7aa5f5b7bc1693e04cca475
 function initMap() {
     var map = new google.maps.Map(document.getElementById("map"),
                                   {
@@ -35,7 +38,10 @@ function initMap() {
     zoom: 13
     });
     
+<<<<<<< HEAD
     
+=======
+>>>>>>> 85cc5e1be11c9306f7aa5f5b7bc1693e04cca475
     var tableRef = document.getElementById('resources');
     
     for (var i = 0; i < resources.length; i++) {
@@ -59,7 +65,11 @@ function initMap() {
         var marker = new google.maps.Marker({
         position: resourceLatLng,
         map: map,
+<<<<<<< HEAD
         icon: category_index == -1 ? "icons/default.gif" : icons[category_index],
+=======
+        icon: category_index == -1 ? default_icon : icons[category_index],
+>>>>>>> 85cc5e1be11c9306f7aa5f5b7bc1693e04cca475
         title: resource.resource_name
         });
         
