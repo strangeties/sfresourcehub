@@ -1,0 +1,48 @@
+:root {
+  --main-text-color: #282828;
+  --resource-text-color: #3399FF;
+  --faint-text-color: #505050;
+}
+
+/* Always set the map height explicitly to define the size of the div
+ * element that contains the map. */
+#map {
+  height: 500px;
+}
+
+/* Optional: Makes the map page fill the window. */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Resource Marker Markup */
+.resource_category {
+  color: var(--resource-text-color);
+  font-size: small;
+  text-align: center;
+  width: 100%;
+}
+
+.resource_org_name {
+  color: var(--main-text-color);
+  font-size: large;
+}
+
+.resource_street {
+  color: var(--faint-text-color);
+  font-size: small;
+}
+
+.resource_notes {
+  color: var(--main-text-color);
+  font-size: x-small;
+}
+
+/* Resource Table Markup */
+td {
+  padding:8px;
+  background: -webkit-radial-gradient(circle, #f5f5dc, #ffffff); }
+}
