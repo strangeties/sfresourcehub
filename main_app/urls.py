@@ -1,5 +1,6 @@
 from . import views
 from django.urls import path
+from .views import contactView, successView
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -9,4 +10,6 @@ urlpatterns = [
     path('resources/create/',
          views.ResourceCreate.as_view(),
          name='resources_create'),
+    path('contact/', contactView, name='contact'),
+    path('success/', successView, name='success'),
 ]

@@ -16,7 +16,7 @@ const categories = [
 ];
 
 const icons = [
-  ".static/images/icons/food.gif",
+  "icons/food.gif",
   "icons/clothing.gif",
   "icons/addiction_recovery.gif",
   "icons/hygiene.gif",
