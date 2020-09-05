@@ -18,6 +18,18 @@ const categories = [
 function initMap() {
   var map = new google.maps.Map(document.getElementById("map"), {
     center: sfLatLng,
+    zoom: 13
+    });
+    
+    var tableRef = document.getElementById('resources');
+    
+    for (var i = 0; i < resources.length; i++) {
+        var resource = resources[i]
+        var resourceLatLng = {lat: resource.lat, lng: resource.long};
+        var category_index = categories.indexOf(resource.category);
+        var category = category_index == -1 ? "------" : `--- ${resource.category} ---`;
+        
+        var contentString = `<div class='resource_category'>${category}</div>
     zoom: 13,
   });
 
@@ -31,12 +43,39 @@ function initMap() {
       category_index == -1 ? "------" : `--- ${resource.category} ---`;
 
     var contentString = `<div class='resource_category'>${category}</div>
+
         <div class='resource_org_name'>${resource.org_name}</div>
         <div class='resource_street'>${resource.address}</div>
         <div class='resource_street'>${resource.hrs}</div>
         <div class='resource_street'>${resource.phone}</div>
         <div class='resource_notes'>${resource.notes}</div>
         <div class='resource_notes'><a href='${resource.link}'>${resource.link}</div>`;
+
+        
+        var infoWindow = new google.maps.InfoWindow({
+        content: contentString
+        });
+        
+        var marker = new google.maps.Marker({
+        position: resourceLatLng,
+        map: map,
+        icon: category_index == -1 ? default_icon : icons[category_index],
+        title: resource.resource_name
+        });
+        
+        google.maps.event.addListener(marker,'click', (function(marker,contentString,infowWindow){
+            return function() {
+                infowWindow.setContent(contentString);
+                infowWindow.open(map,marker);
+            };
+        })(marker,contentString,infoWindow));
+        
+        // Insert a row in the table at the last row
+        var newRow   = tableRef.insertRow();
+        var newCell  = newRow.insertCell(0);
+        newCell.innerHTML = contentString;
+    }
+
 
     var infoWindow = new google.maps.InfoWindow({
       content: contentString,
@@ -65,4 +104,5 @@ function initMap() {
     var newCell = newRow.insertCell(0);
     newCell.innerHTML = contentString;
   }
+
 }
