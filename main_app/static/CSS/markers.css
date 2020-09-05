@@ -7,11 +7,7 @@
 /* Always set the map height explicitly to define the size of the div
  * element that contains the map. */
 #map {
-<<<<<<< HEAD
-  height: 100%;
-=======
   height: 500px;
->>>>>>> 85cc5e1be11c9306f7aa5f5b7bc1693e04cca475
 }
 
 /* Optional: Makes the map page fill the window. */

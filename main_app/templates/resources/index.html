@@ -1,9 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 {% load static %}
-<<<<<<< HEAD
-=======
 
->>>>>>> 85cc5e1be11c9306f7aa5f5b7bc1693e04cca475
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,39 +8,34 @@
   <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
-<<<<<<< HEAD
     />
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-    <title>Place Autocomplete Address Form</title>
+    <title>SF Resource Hub</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/markers.css' %}">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPJpjD-qcR_yIxJnS8maR5W9KB0E3EzYI&callback=initAutocomplete&libraries=places&v=weekly"
-      defer
-    ></script>
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtnS3D3bvBjvrLTLJJOv8xftB5Ctdgeck&callback=initMap&libraries=drawing&v=weekly"
+      defer></script>
     <script>
-      "use strict";
-      let placeSearch;
-      let autocomplete;
+      const icons = [
+      "{% static 'images/icons/food.gif' %}",
+      "{% static 'images/icons/clothing.gif' %}",
+      "{% static 'images/icons/addiction_recovery.gif' %}",
+      "{% static 'images/icons/hygiene.gif' %}",
+      "{% static 'images/icons/financial_empowerment.gif' %}",
+      "{% static 'images/icons/shelter.gif' %}",
+      "{% static 'images/icons/women_and_children.gif' %}",
+      "{% static 'images/icons/mental_health.gif' %}",
+      "{% static 'images/icons/financial_empowerment.gif' %}",
+      "{% static 'images/icons/medical_assistance.gif' %}"
+    ];
 
-      function initAutocomplete() {
-        autocomplete = new google.maps.places.Autocomplete(
-          document.getElementById("autocomplete"),
-          {
-            types: ["geocode"]
-          }
-        );
-        autocomplete.setFields(["geometry"]);
-        autocomplete.addListener("place_changed", fillInAddress);
-      }
-
-      function fillInAddress() {
-        const place = autocomplete.getPlace();
-
-        document.getElementById('latitude').innerHTML = place.geometry.location.lat();
-        document.getElementById('longitude').innerHTML = place.geometry.location.lng();
-      } 
+     const default_icon = "{% static 'images/icons/default.gif' %}"
     </script>
-  </head>
+    <script src="{% static 'js/resources.js' %}"></script>
+    <script src="{% static 'js/markers.js' %}"></script>
+</head>
   <body>
     <div class="container">
       <h1>Resources</h1>
@@ -64,84 +56,7 @@
           </a>
         </div>
       {% endfor %}
-    </div>
-    <div id="locationField">
-      <input
-        id="autocomplete"
-        placeholder="Enter your address"
-        type="text"
-      />
-    </div>
-
-    <table>
-        <tr><td>latitude:</td><td id="latitude"></td></tr>
-        <tr><td>longitude:</td><td id="longitude"></td></tr>
-    </table>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtnS3D3bvBjvrLTLJJOv8xftB5Ctdgeck&callback=initMap&libraries=drawing&v=weekly
-    "></script>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'css/style.css' %}"
-    />
-    <script src="{% static  'js/resources.js' %}"></script>
-    <script src="{% static  'js/render_resources.js' %}"></script>
-
-    <title>Drawing Tools</title>
-    <link rel="stylesheet" type="text/css" href="markers.css">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtnS3D3bvBjvrLTLJJOv8xftB5Ctdgeck&callback=initMap&libraries=drawing&v=weekly"
-      defer></script>
-    <script src="resources.js"></script>
-    <script src="markers.js"></script>
-
-=======
-  />
-  <title>SF Resource Hub</title>
-  <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/markers.css' %}">
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-  <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtnS3D3bvBjvrLTLJJOv8xftB5Ctdgeck&callback=initMap&libraries=drawing&v=weekly"
-      defer></script>
-  <script>
-    const icons = [
-      "{% static 'images/icons/food.gif' %}",
-      "{% static 'images/icons/clothing.gif' %}",
-      "{% static 'images/icons/addiction_recovery.gif' %}",
-      "{% static 'images/icons/hygiene.gif' %}",
-      "{% static 'images/icons/financial_empowerment.gif' %}",
-      "{% static 'images/icons/shelter.gif' %}",
-      "{% static 'images/icons/women_and_children.gif' %}",
-      "{% static 'images/icons/mental_health.gif' %}",
-      "{% static 'images/icons/financial_empowerment.gif' %}",
-      "{% static 'images/icons/medical_assistance.gif' %}"
-    ];
-
-   const default_icon = "{% static 'images/icons/default.gif' %}"
-  </script>
-  <script src="{% static 'js/resources.js' %}"></script>
-  <script src="{% static 'js/markers.js' %}"></script>
-</head>
-<body>
-  <div class="container">
-    <h1>Resources</h1>
-    {% for resource in resources %}
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title">{{ resource.org_name }}</span>
-          <p>Category: {{ resource.category }}</p>
-          <p>NGO: {{ resource.resource_name }}</p>
-          <p>Street: {{ resource.street}}</p>
-          <p>Notes: {{ resource.notes }}</p>
-        </div>
-        </a>
-      </div>
-    {% endfor %}
   </div>
->>>>>>> 85cc5e1be11c9306f7aa5f5b7bc1693e04cca475
   <div id="map"></div>
   <div>
       <table id="resources">
