@@ -1,9 +1,5 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}  {% block content %}
 {% load static %}
-<<<<<<< HEAD
-=======
-
->>>>>>> 85cc5e1be11c9306f7aa5f5b7bc1693e04cca475
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +7,6 @@
   <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
-<<<<<<< HEAD
     />
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     <title>Place Autocomplete Address Form</title>
@@ -96,9 +91,6 @@
       defer></script>
     <script src="resources.js"></script>
     <script src="markers.js"></script>
-
-=======
-  />
   <title>SF Resource Hub</title>
   <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/markers.css' %}">
@@ -108,7 +100,7 @@
       defer></script>
   <script>
     const icons = [
-      "{% static 'images/icons/food.gif' %}",
+      "{% static '/main_app/static/images/icons/food.gif' %}",
       "{% static 'images/icons/clothing.gif' %}",
       "{% static 'images/icons/addiction_recovery.gif' %}",
       "{% static 'images/icons/hygiene.gif' %}",
@@ -126,22 +118,6 @@
   <script src="{% static 'js/markers.js' %}"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>Resources</h1>
-    {% for resource in resources %}
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title">{{ resource.org_name }}</span>
-          <p>Category: {{ resource.category }}</p>
-          <p>NGO: {{ resource.resource_name }}</p>
-          <p>Street: {{ resource.street}}</p>
-          <p>Notes: {{ resource.notes }}</p>
-        </div>
-        </a>
-      </div>
-    {% endfor %}
-  </div>
->>>>>>> 85cc5e1be11c9306f7aa5f5b7bc1693e04cca475
   <div id="map"></div>
   <div>
       <table id="resources">
