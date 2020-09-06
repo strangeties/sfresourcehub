@@ -37,15 +37,16 @@ class Resource(models.Model):
                                 choices=CATEGORIES,
                                 default=UNKNOWN)
     hours = models.TimeField()
-    notes = models.TextField(max_length=250, blank=True)
+    address = models.CharField(max_length=100, blank=True)
     street = models.CharField(max_length=100, blank=True)
     city = models.CharField(max_length=100, blank=True)
     state = models.CharField(max_length=100, blank=True)
+    long = models.DecimalField(max_digits=12, decimal_places=6)
+    lat = models.DecimalField(max_digits=12, decimal_places=6)
     phone = PhoneNumberField()
-    long = models.DecimalField(max_digits=12, decimal_places=6, default=0.000)
-    lat = models.DecimalField(max_digits=12, decimal_places=6, default=0.000)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     url = models.CharField(max_length=200, blank=True)
+    notes = models.TextField(max_length=250, blank=True)
 
     def get_absolute_url(self):
         return reverse('index')
