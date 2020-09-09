@@ -23,8 +23,8 @@ function initMap() {
 
   var tableRef = document.getElementById("resources");
 
-  for (var i = 0; i < resources.length; i++) {
-    var resource = resources[i];
+  for (var i = 0; i < resources_from_database.length; i++) {
+    var resource = resources_from_database[i];
     var resourceLatLng = { lat: resource.lat, lng: resource.long };
     var category_index = categories.indexOf(resource.category);
     var category =

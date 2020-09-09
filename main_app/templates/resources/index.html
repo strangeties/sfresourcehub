@@ -18,6 +18,8 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtnS3D3bvBjvrLTLJJOv8xftB5Ctdgeck&callback=initMap&libraries=drawing&v=weekly"
       defer></script>
     <script>
+<!--      gets paths to icon images-->
+    
       const icons = [
       "{% static 'images/icons/food.gif' %}",
       "{% static 'images/icons/clothing.gif' %}",
@@ -32,6 +34,24 @@
     ];
 
      const default_icon = "{% static 'images/icons/default.gif' %}"
+    
+<!--    places resources in a JS array-->
+      const resources_from_database = []
+      {% for resource in resources %}
+      r = {
+        "resource_name": "{{resource.resource_name}}",
+        "org_name": "{{resource.org_name}}",
+        "category": "{{resource.category}}",
+        "hrs": "{{resource.hours}}",
+        "link": "{{resource.url}}",
+        "notes": "{{resource.notes}}",
+        "address": "{{resource.sreet}}, {{resource.city}}, {{resource.state}}",
+        "lat": {{resource.lat}},
+        "long": {{resource.long}},
+        "phone": "{{resource.phone}}",
+      }
+      resources_from_database.append(r)
+      {% endfor %}
     </script>
     <script src="{% static 'js/resources.js' %}"></script>
     <script src="{% static 'js/markers.js' %}"></script>
