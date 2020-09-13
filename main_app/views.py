@@ -35,11 +35,14 @@ def resourceView(request):
                          category=form.cleaned_data['category'],
                          hours=form.cleaned_data['hours'],
                          address=form.cleaned_data['address'],
-                         street=form.cleaned_data['street'],
+                         street_number=form.cleaned_data['street_number'],
+                         street_name=form.cleaned_data['street_name'],
                          city=form.cleaned_data['city'],
                          state=form.cleaned_data['state'],
-                         long=0,
-                         lat=0,
+                         country=form.cleaned_data['country'],
+                         postal_code=form.cleaned_data['postal_code'],
+                         long=form.cleaned_data['long'],
+                         lat=form.cleaned_data['lat'],
                          phone=form.cleaned_data['phone'],
                          user=request.user,
                          url=form.cleaned_data['url'],
@@ -49,7 +52,7 @@ def resourceView(request):
         else:
            print('!form.is_valid')
            print(form.errors)
-           error_message = 'Invalid - try again'
+           error_message = form.errors
     form = AddResourceForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'resources/create.html', context)

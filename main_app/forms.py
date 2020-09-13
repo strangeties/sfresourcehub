@@ -14,11 +14,22 @@ class AddResourceForm(forms.Form):
     phone = forms.CharField(max_length=20)
     
     address = forms.CharField(max_length=100, required=True)
-    street = forms.CharField(max_length=100, required=False, disabled=True)
-    city = forms.CharField(max_length=100, required=False, disabled=True)
-    state = forms.CharField(max_length=100, required=False, disabled=True)
-    long = forms.DecimalField(max_digits=12, decimal_places=6, required=False, disabled=True)
-    lat = forms.DecimalField(max_digits=12, decimal_places=6, required=False, disabled=True)
+    street_number = forms.CharField(widget=forms.HiddenInput(),
+                                    max_length=100, required=False, disabled=False)
+    street_name = forms.CharField(widget=forms.HiddenInput(),
+                                  max_length=100, required=False, disabled=False)
+    city = forms.CharField(widget=forms.HiddenInput(),
+                           max_length=100, required=False, disabled=False)
+    state = forms.CharField(widget=forms.HiddenInput(),
+                            max_length=100, required=False, disabled=False)
+    country = forms.CharField(widget=forms.HiddenInput(),
+                              max_length=100, required=False, disabled=False)
+    postal_code = forms.CharField(widget=forms.HiddenInput(),
+                                  max_length=100, required=False, disabled=False)
+    long = forms.DecimalField(widget=forms.HiddenInput(),
+                              required=False, disabled=False)
+    lat = forms.DecimalField(widget=forms.HiddenInput(),
+                             required=False, disabled=False)
 
     url = forms.URLField(max_length=100)
     notes = forms.CharField(max_length=250)
