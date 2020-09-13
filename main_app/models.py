@@ -32,6 +32,7 @@ class Resource(models.Model):
     )
 
     resource_name = models.CharField(max_length=100)
+    # TODO: org_name can be a ForeignKey.
     org_name = models.CharField(max_length=100, blank=True)
     category = models.CharField(max_length=100, 
                                 choices=CATEGORIES,
@@ -48,5 +49,10 @@ class Resource(models.Model):
     url = models.CharField(max_length=200, blank=True)
     notes = models.TextField(max_length=250, blank=True)
 
+    ordering = ['org_name', 'category', 'resource_name']
+
     def get_absolute_url(self):
         return reverse('index')
+
+    def __str__(self):
+        return f'{self.org_name}: {self.resource_name}'
