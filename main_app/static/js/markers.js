@@ -3,15 +3,26 @@
 const sfLatLng = { lat: 37.7749, lng: -122.4194 };
 
 const categories = [
+  "FOOD",
+  "CLOTHING",
+  "ADDICTION_RECOVERY",
+  "HYGIENE",
+  "FINANCIAL_EMPOWERMENT",
+  "SHELTER",
+  "WOMEN_AND_CHILDREN",
+  "MENTAL_HEALTH_SERVICES",
+  "MEDICAL_ASSISTANCE"
+];
+
+const category_names = [
   "Food",
   "Clothing",
   "Addiction Recovery",
   "Hygiene",
   "Financial Empowerment",
   "Shelter",
-  "Women/Children",
-  "Mental health services",
-  "Financial Empowerment",
+  "Women and Children",
+  "Mental Health Services",
   "Medical Assistance",
 ];
 
@@ -28,7 +39,7 @@ function initMap() {
     var resourceLatLng = { lat: resource.lat, lng: resource.long };
     var category_index = categories.indexOf(resource.category);
     var category =
-      category_index == -1 ? "------" : `--- ${resource.category} ---`;
+      category_index == -1 ? "------" : `--- ${category_names[category_index]} ---`;
 
     var contentString = `<div class='resource_category'>${category}</div>
         <div class='resource_org_name'>${resource.org_name}</div>
