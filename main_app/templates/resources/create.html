@@ -10,6 +10,7 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    {{ form.media }}
     <title>SF Resource Hub</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script
@@ -71,6 +72,7 @@
     </script>
 </head>
 
+<body onload="updatePhoneNumberForm()">
 <h1>Add Resources</h1>
 <form method="post">
   {% csrf_token %} {{ form.as_p }}
