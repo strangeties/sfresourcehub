@@ -36,11 +36,24 @@
 <!--    places resources in a JS array-->
       const resources_from_database = []
       {% for resource in resources %}
+
+      opening_hours = "<ul>"
+      {% for key, value in resource.opening_hours.opening_hours.items %}
+         console.log("{{key}}")
+         console.log("{{value.enabled}}")
+         if ("{{value.enabled}}" == "True") {
+           opening_hours += "<li>{{key}}: {{value.opening_time}} - {{value.closing_time}}</li>"
+         } else {
+           opening_hours += "<li>{{key}}: closed</li>"
+         }
+      {% endfor %}
+      opening_hours += "\n<ul>"
+
       r = {
         resource_name: "{{resource.resource_name}}",
         org_name: "{{resource.org_name}}",
         category: "{{resource.category}}",
-        hrs: "{{resource.hours}}",
+        hrs: opening_hours,
         link: "{{resource.url}}",
         notes: "{{resource.notes}}",
         address: "{{resource.address}}",
@@ -49,37 +62,17 @@
         phone: "{{resource.phone}}",
       }
       resources_from_database.push(r)
-      {% endfor %}
+    {% endfor %}
     </script>
     <script src="{% static 'js/resources.js' %}"></script>
     <script src="{% static 'js/markers.js' %}"></script>
 </head>
   <body>
-    <div class="container">
-      <h1>Resources</h1>
-      {% for resource in resources %}
-        <div class="card">
-          <div class="card-content">
-            <span class="card-title">{{ resource.org_name }}</span>
-            <br>
-            <p>Resource: {{ resource.resource_name }}</p>
-            <p>Category: {{ resource.category }}</p>
-            <p>Hours: {{ resource.hours }}</p>
-            <p>Street: {{ resource.street}}</p>
-            <p>City: {{ resource.city}}</p>
-            <p>State: {{ resource.state }}</p>
-            <p>Phone: {{ resource.phone}}</p>
-            <p>{{ resource.url }}</p>
-          </div>
-          </a>
-        </div>
-      {% endfor %}
+    <div id="map"></div>
+    <div>
+        <table id="resources">
+        </table>
     </div>
-  <div id="map"></div>
-  <div>
-      <table id="resources">
-      </table>
-  </div>
-  {% endblock %}
 </body>
 </html>
+{% endblock %}

@@ -1,8 +1,91 @@
+import re
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 from phonenumber_field.modelfields import PhoneNumberField
 
+WEEKDAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+
+class OpeningHours(object):
+    def __init__(self, enabled, opening_time, closing_time):
+        self.enabled = enabled
+        self.opening_time = opening_time
+        self.closing_time = closing_time
+
+class WeeklyOpeningHours(object):
+    def __init__(self, opening_hours_array):
+        self.opening_hours = {}
+        for i in range(len(WEEKDAYS)):
+            self.opening_hours[WEEKDAYS[i]] = opening_hours_array[i]
+
+def parse_weekly_opening_hours(value):
+    opening_hours = []
+    for weekday in WEEKDAYS:
+        match = re.search('\(%s ([0-9][0-9]:[0-9][0-9]) ([0-9][0-9]:[0-9][0-9])\)'%weekday, value)
+        if match:
+            opening_hours.append(OpeningHours(True, match.group(0), match.group(1)))
+        else:
+            opening_hours.append(OpeningHours(False, '00:00', '00:00')) 
+    return WeeklyOpeningHours(opening_hours)
+        
+class WeeklyOpeningHoursField(models.Field):
+    def __init__(self, *args, **kwargs):
+        kwargs['max_length'] = 512
+        kwargs['default'] = ''
+        super().__init__(*args, **kwargs)
+
+    def deconstruct(self):
+        name, path, args, kwargs = super.deconstruct()
+        del kwargs["max_length"]
+        del kwargs['default']
+        return name, path, args, kwargs
+  
+    def db_type(self, connection):
+        return 'char(512)'
+
+    def from_db_value(self, value, expression, connection):
+        if value is None:
+            return value
+        return parse_weekly_opening_hours(value)
+
+    def to_python(self, value):
+        if isinstance(value, WeeklyOpeningHours):
+            return value
+        if value is None:
+            return value
+        return parse_weekly_opening_hours(value)
+
+    def get_prep_value(self, value):
+        if isinstance(value, str):
+            return value
+        if value is None:
+            return None
+        opening_hours_str_list = []
+        for weekday in WEEKDAYS:
+            if value.opening_hours[weekday].enabled:
+               opening_hours_str_list.append('%s %s %s'%(value.opening_hours[weekday].opening_time,
+                                                         value.opening_hours[weekday].closing_time))
+        return ''.join(opening_hours_str_list)
+
+    def get_db_prep_value(self, value, connection, prepared=False):
+        value = super().get_db_prep_value(value, connection, prepared)
+        if isinstance(value, str):
+            return value
+        if value is None:
+            return ""
+        opening_hours_str_list = []
+        for weekday in WEEKDAYS:
+            if value.opening_hours[weekday].enabled:
+               opening_hours_str_list.append('%s %s %s'%(value.opening_hours[weekday].opening_time,
+                                                         value.opening_hours[weekday].closing_time))
+        return ''.join(opening_hours_str_list)
+
+    def formfield(self, **kwargs):
+        defaults = {'form_class': forms.TextInput()}
+        defaults.update(kwargs)
+        return super().formfield(**defaults) 
+    
 class Resource(models.Model):
     # constants for the enum field, category.
     UNKNOWN = "UNKNOWN"
@@ -37,7 +120,8 @@ class Resource(models.Model):
     category = models.CharField(max_length=100, 
                                 choices=CATEGORIES,
                                 default=UNKNOWN)
-    hours = models.TimeField()
+
+    opening_hours = WeeklyOpeningHoursField()
     address = models.CharField(max_length=100, blank=True)
     street_number = models.CharField(max_length=100, blank=True)
     street_name = models.CharField(max_length=100, blank=True)

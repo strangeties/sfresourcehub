@@ -33,7 +33,7 @@ def resourceView(request):
             r = Resource(resource_name=form.cleaned_data['resource_name'],
                          org_name=form.cleaned_data['org_name'],
                          category=form.cleaned_data['category'],
-                         hours=form.cleaned_data['hours'],
+                         opening_hours=form.cleaned_data['opening_hours'],
                          address=form.cleaned_data['address'],
                          street_number=form.cleaned_data['street_number'],
                          street_name=form.cleaned_data['street_name'],
@@ -54,7 +54,7 @@ def resourceView(request):
            print(form.errors)
            error_message = form.errors
     form = AddResourceForm()
-    context = {'form': form, 'error_message': error_message}
+    context = {'form': form}
     return render(request, 'resources/create.html', context)
 
 def signup(request):

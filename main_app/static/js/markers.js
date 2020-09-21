@@ -98,9 +98,4 @@ function initMap() {
       };
     })(marker, contentString, infoWindow)
   );
-
-  // Insert a row in the table at the last row
-  var newRow = tableRef.insertRow();
-  var newCell = newRow.insertCell(0);
-  newCell.innerHTML = contentString;
 }
