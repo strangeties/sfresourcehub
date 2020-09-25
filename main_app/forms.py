@@ -25,13 +25,31 @@ class USPhoneNumberMultiWidget(forms.MultiWidget):
         values = super(USPhoneNumberMultiWidget, self).value_from_datadict(data, files, name)
         return u'+1 (%s)-%s-%s' % (values[0], values[1], values[2])
 
+class SliderWidget(forms.CheckboxInput):
+    class Media:
+        css = {
+            'all': ('CSS/slider.css',)
+        }
+    def __init__(self, attrs=None):
+        forms.CheckboxInput.__init__(self, attrs)
+        self.template_name = 'widgets/slider.html'
+
+class TimeWidget(forms.TimeInput):
+    def __init__(self, attrs=None):
+        if attrs == None:
+            attrs = {}
+        attrs['type'] = 'time'
+        forms.TimeInput.__init__(self, attrs)
+
 class OpeningHoursMultiWidget(forms.MultiWidget):
+    class Media:
+        js = ('js/weekly_opening_hours.js',)
     def __init__(self, attrs=None):
         print('attrs:'+ attrs['weekday'])
         self.template_name = 'widgets/opening_hours.html'
-        widgets = (forms.TimeInput(attrs={'class': 'time'}),
-                   forms.TimeInput(attrs={'class': 'time'}),
-                   forms.CheckboxInput(attrs={'class': 'time_enabled'}))
+        widgets = (TimeWidget(attrs={'class': 'time', 'disabled': 'true'}),
+                   TimeWidget(attrs={'class': 'time', 'disabled': 'true'}),
+                   SliderWidget(attrs={'class': 'time_enabled'}))
         super(OpeningHoursMultiWidget, self).__init__(widgets, attrs)
     
     def decompress(self, value):
