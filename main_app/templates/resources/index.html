@@ -9,13 +9,12 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     <title>SF Resource Hub</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/markers.css' %}">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtnS3D3bvBjvrLTLJJOv8xftB5Ctdgeck&callback=initMap&libraries=drawing&v=weekly"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfXa-qMJ4xi6DKVaa_N_xsPSXWq2YKEyA&callback=initMap&libraries=drawing&v=weekly"
       defer></script>
     <script>
 <!--      gets paths to icon images-->
@@ -29,7 +28,6 @@
       "{% static 'images/icons/shelter.gif' %}",
       "{% static 'images/icons/women_and_children.gif' %}",
       "{% static 'images/icons/mental_health.gif' %}",
-      "{% static 'images/icons/financial_empowerment.gif' %}",
       "{% static 'images/icons/medical_assistance.gif' %}"
     ];
 
@@ -38,50 +36,43 @@
 <!--    places resources in a JS array-->
       const resources_from_database = []
       {% for resource in resources %}
-      r = {
-        "resource_name": "{{resource.resource_name}}",
-        "org_name": "{{resource.org_name}}",
-        "category": "{{resource.category}}",
-        "hrs": "{{resource.hours}}",
-        "link": "{{resource.url}}",
-        "notes": "{{resource.notes}}",
-        "address": "{{resource.sreet}}, {{resource.city}}, {{resource.state}}",
-        "lat": {{resource.lat}},
-        "long": {{resource.long}},
-        "phone": "{{resource.phone}}",
-      }
-      resources_from_database.append(r)
+
+      opening_hours = "<ul>"
+      {% for key, value in resource.opening_hours.opening_hours.items %}
+         console.log("{{key}}")
+         console.log("{{value.enabled}}")
+         if ("{{value.enabled}}" == "True") {
+           opening_hours += "<li>{{key}}: {{value.opening_time}} - {{value.closing_time}}</li>"
+         } else {
+           opening_hours += "<li>{{key}}: closed</li>"
+         }
       {% endfor %}
+      opening_hours += "\n<ul>"
+
+      r = {
+        resource_name: "{{resource.resource_name}}",
+        org_name: "{{resource.org_name}}",
+        category: "{{resource.category}}",
+        hrs: opening_hours,
+        link: "{{resource.url}}",
+        notes: "{{resource.notes}}",
+        address: "{{resource.address}}",
+        lat: {{resource.lat}},
+        long: {{resource.long}},
+        phone: "{{resource.phone}}",
+      }
+      resources_from_database.push(r)
+    {% endfor %}
     </script>
     <script src="{% static 'js/resources.js' %}"></script>
     <script src="{% static 'js/markers.js' %}"></script>
 </head>
   <body>
-    <div class="container">
-      <h1>Resources</h1>
-      {% for resource in resources %}
-        <div class="card">
-          <div class="card-content">
-            <span class="card-title">{{ resource.org_name }}</span>
-            <br>
-            <p>Resource: {{ resource.resource_name }}</p>
-            <p>Category: {{ resource.category }}</p>
-            <p>Hours: {{ resource.hours }}</p>
-            <p>Street: {{ resource.street}}</p>
-            <p>City: {{ resource.city}}</p>
-            <p>State: {{ resource.state }}</p>
-            <p>Phone: {{ resource.phone}}</p>
-            <p>{{ resource.url }}</p>
-          </div>
-          </a>
-        </div>
-      {% endfor %}
+    <div id="map"></div>
+    <div>
+        <table id="resources">
+        </table>
     </div>
-  <div id="map"></div>
-  <div>
-      <table id="resources">
-      </table>
-  </div>
-  {% endblock %}
 </body>
 </html>
+{% endblock %}
