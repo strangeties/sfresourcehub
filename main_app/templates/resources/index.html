@@ -31,6 +31,7 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtnS3D3bvBjvrLTLJJOv8xftB5Ctdgeck&callback=initMap&libraries=drawing&v=weekly"
       defer
     ></script>
+    <script>
 
 <!--      gets paths to icon images-->
     
@@ -49,8 +50,9 @@
      const default_icon = "{% static 'images/icons/default.gif' %}"
     
 <!--    places resources in a JS array-->
-      const resources_from_database = []
+      resources_from_database = []
       {% for resource in resources %}
+        console.log('resource.resource_name')
 
       opening_hours = "<ul>"
       {% for key, value in resource.opening_hours.opening_hours.items %}
@@ -111,4 +113,3 @@
   </body>
 
 </html>
-{% endblock %}
