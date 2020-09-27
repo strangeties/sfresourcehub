@@ -74,9 +74,11 @@
 
 <body onload="initializeOpeningHourBehavior()">
 <h1>Add Resources</h1>
-<form method="post">
+<form method="post" nonvalidate>
   {% csrf_token %}
-  {{ form.as_p }}
+  <table>
+  {{ form.as_table }}
+  </table>
   <div class="form-actions">
     <button type="submit">Send</button>
   </div>

@@ -1,5 +1,6 @@
 from .models import OpeningHours
 from .models import Resource
+from .models import WEEKDAYS
 from .models import WeeklyOpeningHours
 from django import forms
 
@@ -45,11 +46,10 @@ class OpeningHoursMultiWidget(forms.MultiWidget):
     class Media:
         js = ('js/weekly_opening_hours.js',)
     def __init__(self, attrs=None):
-        print('attrs:'+ attrs['weekday'])
         self.template_name = 'widgets/opening_hours.html'
-        widgets = (TimeWidget(attrs={'class': 'time', 'disabled': 'true'}),
-                   TimeWidget(attrs={'class': 'time', 'disabled': 'true'}),
-                   SliderWidget(attrs={'class': 'time_enabled'}))
+        widgets = (SliderWidget(attrs={'class': 'time_enabled'}),
+                   TimeWidget(attrs={'class': 'time', 'style': 'visibility: hidden'}),
+                   TimeWidget(attrs={'class': 'time', 'style': 'visibility: hidden'}))
         super(OpeningHoursMultiWidget, self).__init__(widgets, attrs)
     
     def decompress(self, value):
@@ -58,11 +58,14 @@ class OpeningHoursMultiWidget(forms.MultiWidget):
         return [None,None,None]
 
     def value_from_datadict(self, data, files, name):
-        return OpeningHours(False, '00:00', '00:00')
+        values = super(OpeningHoursMultiWidget, self).value_from_datadict(data, files, name)
+        if values[0]:
+          return '%s %s'%(values[1], values[2])
+        else:
+          return None
 
 class WeeklyOpeningHoursMultiWidget(forms.MultiWidget):
     def __init__(self, attrs=None):
-        print('calling __init__')
         self.template_name = 'widgets/weekly_opening_hours.html'
         widgets = (OpeningHoursMultiWidget(attrs={'weekday': 'Monday'}),
                    OpeningHoursMultiWidget(attrs={'weekday': 'Tuesday'}),
@@ -74,15 +77,16 @@ class WeeklyOpeningHoursMultiWidget(forms.MultiWidget):
         super(WeeklyOpeningHoursMultiWidget, self).__init__(widgets, attrs)
 
     def decompress(self, value):
-        print('calling decompress')
         if value:
             return value.split('-')
         return [None,None,None,None,None,None,None]
 
     def value_from_datadict(self, data, files, name):
-        print('calling value_from_datadict')
         values = super(WeeklyOpeningHoursMultiWidget, self).value_from_datadict(data, files, name)
-        return WeeklyOpeningHours(values)
+        str = ''
+        for i in range(7):
+            str += '(%s %s)'%(WEEKDAYS[i], values[i])
+        return str
 
 class ContactForm(forms.Form):
     from_email = forms.EmailField(required=True)
@@ -93,7 +97,7 @@ class AddResourceForm(forms.Form):
     resource_name = forms.CharField(max_length=100, required=True)
     org_name = forms.CharField(max_length=100, required=True)
     category = forms.ChoiceField(choices=Resource.CATEGORIES)
-    opening_hours = forms.CharField(max_length=512, widget=WeeklyOpeningHoursMultiWidget())
+    opening_hours = forms.CharField(max_length=512, widget=WeeklyOpeningHoursMultiWidget(), required=False)
     phone = forms.CharField(widget=USPhoneNumberMultiWidget())
   
     address = forms.CharField(max_length=100, required=True)

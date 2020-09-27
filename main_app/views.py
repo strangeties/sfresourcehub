@@ -27,6 +27,7 @@ def resources_index(request):
 def resourceView(request):
     error_message = ''
     if request.method == 'POST':
+        print('resourceView: POST')
         form = AddResourceForm(request.POST)
         if form.is_valid():
             print('form.is_valid')

@@ -1,5 +1,6 @@
 import re
 
+from django import forms
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
@@ -24,7 +25,7 @@ def parse_weekly_opening_hours(value):
     for weekday in WEEKDAYS:
         match = re.search('\(%s ([0-9][0-9]:[0-9][0-9]) ([0-9][0-9]:[0-9][0-9])\)'%weekday, value)
         if match:
-            opening_hours.append(OpeningHours(True, match.group(0), match.group(1)))
+            opening_hours.append(OpeningHours(True, match.group(1), match.group(2)))
         else:
             opening_hours.append(OpeningHours(False, '00:00', '00:00')) 
     return WeeklyOpeningHours(opening_hours)
@@ -35,21 +36,19 @@ class WeeklyOpeningHoursField(models.Field):
         kwargs['default'] = ''
         super().__init__(*args, **kwargs)
 
-    def deconstruct(self):
-        name, path, args, kwargs = super.deconstruct()
-        del kwargs["max_length"]
-        del kwargs['default']
-        return name, path, args, kwargs
-  
     def db_type(self, connection):
         return 'char(512)'
 
     def from_db_value(self, value, expression, connection):
+        print('WeeklyOpeningHoursField - from_db_value')
+        print(value)
         if value is None:
             return value
         return parse_weekly_opening_hours(value)
 
     def to_python(self, value):
+        print('WeeklyOpeningHoursField - to_python')
+        print(value)
         if isinstance(value, WeeklyOpeningHours):
             return value
         if value is None:
@@ -57,10 +56,15 @@ class WeeklyOpeningHoursField(models.Field):
         return parse_weekly_opening_hours(value)
 
     def get_prep_value(self, value):
+        print('WeeklyOpeningHoursField - get_prep_value')
+        print(value)
         if isinstance(value, str):
+            print('isinstance(value, str)')
             return value
         if value is None:
+            print('value is None')
             return None
+        print('value is an object : D')
         opening_hours_str_list = []
         for weekday in WEEKDAYS:
             if value.opening_hours[weekday].enabled:
@@ -70,10 +74,15 @@ class WeeklyOpeningHoursField(models.Field):
 
     def get_db_prep_value(self, value, connection, prepared=False):
         value = super().get_db_prep_value(value, connection, prepared)
+        print('WeeklyOpeningHoursField - get_db_prep_value')
+        print(value)
         if isinstance(value, str):
+            print('isinstance(value, str)')
             return value
         if value is None:
+            print('value is None')
             return ""
+        print('value is an object : D')
         opening_hours_str_list = []
         for weekday in WEEKDAYS:
             if value.opening_hours[weekday].enabled:
@@ -82,7 +91,8 @@ class WeeklyOpeningHoursField(models.Field):
         return ''.join(opening_hours_str_list)
 
     def formfield(self, **kwargs):
-        defaults = {'form_class': forms.TextInput()}
+        print('WeeklyOpeningHoursField - formField')
+        defaults = {'form_class': forms.CharField}
         defaults.update(kwargs)
         return super().formfield(**defaults) 
     

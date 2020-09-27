@@ -1,3 +1,5 @@
+<table>
 {% spaceless %}{% for widget in widget.subwidgets %}
-  <p>{{widget.attrs.weekday}}: {% include widget.template_name %}</p>
+  <tr><td>{{widget.attrs.weekday}}</td><td>{% include widget.template_name %}</td></tr>
 {% endfor %}{% endspaceless %}
+</table>
