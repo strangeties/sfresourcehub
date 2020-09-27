@@ -1,67 +1,77 @@
-{% extends 'base.html' %}  {% block content %}
-{% load static %}
+{% extends 'base.html' %} {% block content %} {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta
+  <head>
+    <meta charset="utf-8" />
+    <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/styles.css' %}"
+    />
     <title>SF Resource Hub</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/markers.css' %}">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/styles.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/markers.css' %}"
+    />
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtnS3D3bvBjvrLTLJJOv8xftB5Ctdgeck&callback=initMap&libraries=drawing&v=weekly"
-      defer></script>
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtnS3D3bvBjvrLTLJJOv8xftB5Ctdgeck&callback=initMap&libraries=drawing&v=weekly"
+      defer
+    ></script>
     <script>
       const icons = [
-      "{% static 'images/icons/food.gif' %}",
-      "{% static 'images/icons/clothing.gif' %}",
-      "{% static 'images/icons/addiction_recovery.gif' %}",
-      "{% static 'images/icons/hygiene.gif' %}",
-      "{% static 'images/icons/financial_empowerment.gif' %}",
-      "{% static 'images/icons/shelter.gif' %}",
-      "{% static 'images/icons/women_and_children.gif' %}",
-      "{% static 'images/icons/mental_health.gif' %}",
-      "{% static 'images/icons/financial_empowerment.gif' %}",
-      "{% static 'images/icons/medical_assistance.gif' %}"
-    ];
+        "{% static 'images/icons/food.gif' %}",
+        "{% static 'images/icons/clothing.gif' %}",
+        "{% static 'images/icons/addiction_recovery.gif' %}",
+        "{% static 'images/icons/hygiene.gif' %}",
+        "{% static 'images/icons/financial_empowerment.gif' %}",
+        "{% static 'images/icons/shelter.gif' %}",
+        "{% static 'images/icons/women_and_children.gif' %}",
+        "{% static 'images/icons/mental_health.gif' %}",
+        "{% static 'images/icons/financial_empowerment.gif' %}",
+        "{% static 'images/icons/medical_assistance.gif' %}",
+      ];
 
-     const default_icon = "{% static 'images/icons/default.gif' %}"
+      const default_icon = "{% static 'images/icons/default.gif' %}";
     </script>
     <script src="{% static 'js/resources.js' %}"></script>
     <script src="{% static 'js/markers.js' %}"></script>
-</head>
+  </head>
   <body>
-    <div class="container">
-      <h1>Resources</h1>
-      {% for resource in resources %}
-        <div class="card">
-          <div class="card-content">
-            <span class="card-title">{{ resource.org_name }}</span>
-            <br>
-            <p>Resource: {{ resource.resource_name }}</p>
-            <p>Category: {{ resource.category }}</p>
-            <p>Hours: {{ resource.hours }}</p>
-            <p>Street: {{ resource.street}}</p>
-            <p>City: {{ resource.city}}</p>
-            <p>State: {{ resource.state }}</p>
-            <p>Phone: {{ resource.phone}}</p>
-            <p>{{ resource.url }}</p>
-          </div>
-          </a>
+    <h1>Resources</h1>
+    {% for resource in resources %} {% if request.user %}
+    <a href="{% url 'detail' resource.id %}">
+      {% endif %}
+      <div
+        class="card text-center shadow-lg p-3 mb-5 bg-white rounded"
+        id="card"
+        style="width: 18rem"
+      >
+        <div class="card-content">
+          <h5 class="card-title">{{ resource.org_name }}</h5>
+          <br />
+          <p>Resource: {{ resource.resource_name }}</p>
+          <p>Category: {{ resource.category }}</p>
         </div>
-      {% endfor %}
+      </div>
+    </a>
+    {% endfor %}
+    <br />
+    <div id="map"></div>
+    <div>
+      <table id="resources"></table>
     </div>
-  <div id="map"></div>
-  <div>
-      <table id="resources">
-      </table>
-  </div>
-  {% endblock %}
-</body>
+    {% endblock %}
+  </body>
 </html>
