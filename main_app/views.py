@@ -80,15 +80,55 @@ def contactView(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             subject = form.cleaned_data['subject']
-            from_email = form.cleaned_data['from_email']
+            sender = form.cleaned_data['from_email']
             message = form.cleaned_data['message']
+            recipent = ['sfresourcehub@gmail.com']
             try:
-                send_mail(subject, message, from_email, ['admin@example.com'])
+                send_mail(subject, message, sender,
+                          recipent, fail_silently=True)
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
-            return redirect('success')
+            return HttpResponse('Success! Thank you for your message.')
     return render(request, "email.html", {'form': form})
 
 
 def successView(request):
     return HttpResponse('Success! Thank you for your message.')
+
+
+# def contact(request):
+#     if request.method == "POST":
+#         message_name = request.POST['message_name']
+#         message_email = request.POST['message_email']
+#         message = request.POST['message']
+
+#         send_mail(
+#             message_name,
+#             message,
+#             message_email,
+#             ['sfresourcehub@gmail.com'],
+#         )
+#         return render(request, 'email.html', {'message_name': message_name})
+#     else:
+#         return render(request, 'email.html', {})
+
+def resources_detail(request, resource_id):
+    resource = Resource.objects.get(id=resource_id)
+    return render(
+        request,
+        'resources/detail.html',
+        {
+            # Pass the cat and feeding_form as context
+            'resource': resource
+        })
+
+
+class ResourceUpdate(LoginRequiredMixin, UpdateView):
+    model = Resource
+    fields = ['resource_name', 'org_name', 'category', 'hours',
+              'notes', 'street', 'city', 'state', 'phone', 'long', 'lat', 'url']
+
+
+class ResourceDelete(LoginRequiredMixin, DeleteView):
+    model = Resource
+    success_url = '/resources/'

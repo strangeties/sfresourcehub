@@ -1,22 +1,37 @@
-{% extends 'base.html' %}  {% block content %}
-{% load static %}
+{% extends 'base.html' %} {% block content %} {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta
+  <head>
+    <meta charset="utf-8" />
+    <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/styles.css' %}"
+    />
     <title>SF Resource Hub</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/markers.css' %}">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/styles.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/markers.css' %}"
+    />
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfXa-qMJ4xi6DKVaa_N_xsPSXWq2YKEyA&callback=initMap&libraries=drawing&v=weekly"
-      defer></script>
-    <script>
+
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtnS3D3bvBjvrLTLJJOv8xftB5Ctdgeck&callback=initMap&libraries=drawing&v=weekly"
+      defer
+    ></script>
+
 <!--      gets paths to icon images-->
     
       const icons = [
@@ -63,16 +78,37 @@
       }
       resources_from_database.push(r)
     {% endfor %}
+
     </script>
     <script src="{% static 'js/resources.js' %}"></script>
     <script src="{% static 'js/markers.js' %}"></script>
-</head>
+  </head>
   <body>
+    <h1>Resources</h1>
+    {% for resource in resources %} {% if request.user %}
+    <a href="{% url 'detail' resource.id %}">
+      {% endif %}
+      <div
+        class="card text-center shadow-lg p-3 mb-5 bg-white rounded"
+        id="card"
+        style="width: 18rem"
+      >
+        <div class="card-content">
+          <h5 class="card-title">{{ resource.org_name }}</h5>
+          <br />
+          <p>Resource: {{ resource.resource_name }}</p>
+          <p>Category: {{ resource.category }}</p>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+    <br />
     <div id="map"></div>
     <div>
-        <table id="resources">
-        </table>
+      <table id="resources"></table>
     </div>
-</body>
+    {% endblock %}
+  </body>
+
 </html>
 {% endblock %}
