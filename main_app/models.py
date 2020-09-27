@@ -4,7 +4,6 @@ from django import forms
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
-from phonenumber_field.modelfields import PhoneNumberField
 
 WEEKDAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
 
@@ -141,7 +140,7 @@ class Resource(models.Model):
     postal_code = models.CharField(max_length=10, blank=True)
     long = models.DecimalField(max_digits=12, decimal_places=6)
     lat = models.DecimalField(max_digits=12, decimal_places=6)
-    phone = PhoneNumberField()
+    phone = models.CharField(max_length=16)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     url = models.CharField(max_length=200, blank=True)
     notes = models.TextField(max_length=250, blank=True)
