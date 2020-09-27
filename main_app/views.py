@@ -1,5 +1,6 @@
 
 from .forms import ContactForm  # Add this
+from .forms import AddResourceForm # Add this
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Resource
 from django.contrib.auth.forms import UserCreationForm
@@ -23,16 +24,39 @@ def resources_index(request):
     resources = Resource.objects.all()
     return render(request, 'resources/index.html', {'resources': resources})
 
-
-class ResourceCreate(LoginRequiredMixin, CreateView):
-    model = Resource
-    fields = ['resource_name', 'org_name', 'category', 'hours',
-              'notes', 'street', 'city', 'state', 'phone', 'long', 'lat', 'url']
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
-
+def resourceView(request):
+    error_message = ''
+    if request.method == 'POST':
+        print('resourceView: POST')
+        form = AddResourceForm(request.POST)
+        if form.is_valid():
+            print('form.is_valid')
+            r = Resource(resource_name=form.cleaned_data['resource_name'],
+                         org_name=form.cleaned_data['org_name'],
+                         category=form.cleaned_data['category'],
+                         opening_hours=form.cleaned_data['opening_hours'],
+                         address=form.cleaned_data['address'],
+                         street_number=form.cleaned_data['street_number'],
+                         street_name=form.cleaned_data['street_name'],
+                         city=form.cleaned_data['city'],
+                         state=form.cleaned_data['state'],
+                         country=form.cleaned_data['country'],
+                         postal_code=form.cleaned_data['postal_code'],
+                         long=form.cleaned_data['long'],
+                         lat=form.cleaned_data['lat'],
+                         phone=form.cleaned_data['phone'],
+                         user=request.user,
+                         url=form.cleaned_data['url'],
+                         notes=form.cleaned_data['notes'])
+            r.save()
+            return redirect('index')
+        else:
+           print('!form.is_valid')
+           print(form.errors)
+           error_message = form.errors
+    form = AddResourceForm()
+    context = {'form': form}
+    return render(request, 'resources/create.html', context)
 
 def signup(request):
     error_message = ''
