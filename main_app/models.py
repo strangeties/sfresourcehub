@@ -39,15 +39,11 @@ class WeeklyOpeningHoursField(models.Field):
         return 'char(512)'
 
     def from_db_value(self, value, expression, connection):
-        print('WeeklyOpeningHoursField - from_db_value')
-        print(value)
         if value is None:
             return value
         return parse_weekly_opening_hours(value)
 
     def to_python(self, value):
-        print('WeeklyOpeningHoursField - to_python')
-        print(value)
         if isinstance(value, WeeklyOpeningHours):
             return value
         if value is None:
@@ -55,15 +51,10 @@ class WeeklyOpeningHoursField(models.Field):
         return parse_weekly_opening_hours(value)
 
     def get_prep_value(self, value):
-        print('WeeklyOpeningHoursField - get_prep_value')
-        print(value)
         if isinstance(value, str):
-            print('isinstance(value, str)')
             return value
         if value is None:
-            print('value is None')
             return None
-        print('value is an object : D')
         opening_hours_str_list = []
         for weekday in WEEKDAYS:
             if value.opening_hours[weekday].enabled:
@@ -73,15 +64,10 @@ class WeeklyOpeningHoursField(models.Field):
 
     def get_db_prep_value(self, value, connection, prepared=False):
         value = super().get_db_prep_value(value, connection, prepared)
-        print('WeeklyOpeningHoursField - get_db_prep_value')
-        print(value)
         if isinstance(value, str):
-            print('isinstance(value, str)')
             return value
         if value is None:
-            print('value is None')
             return ""
-        print('value is an object : D')
         opening_hours_str_list = []
         for weekday in WEEKDAYS:
             if value.opening_hours[weekday].enabled:
@@ -90,7 +76,6 @@ class WeeklyOpeningHoursField(models.Field):
         return ''.join(opening_hours_str_list)
 
     def formfield(self, **kwargs):
-        print('WeeklyOpeningHoursField - formField')
         defaults = {'form_class': forms.CharField}
         defaults.update(kwargs)
         return super().formfield(**defaults) 
