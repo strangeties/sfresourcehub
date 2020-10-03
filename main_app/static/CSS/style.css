@@ -73,7 +73,13 @@ h1 {
 
 form {
   color: #14a3b8;
-  text-align: center;
+  padding-left: 20px;
+}
+
+th {
+  padding-right: 20px;
+  vertical-align: top;
+  text-align: top;
 }
 
 /*.btn {*/
