@@ -52,12 +52,8 @@
 <!--    places resources in a JS array-->
       resources_from_database = []
       {% for resource in resources %}
-        console.log('resource.resource_name')
-
       opening_hours = "<ul>"
       {% for key, value in resource.opening_hours.opening_hours.items %}
-         console.log("{{key}}")
-         console.log("{{value.enabled}}")
          if ("{{value.enabled}}" == "True") {
            opening_hours += "<li>{{key}}: {{value.opening_time}} - {{value.closing_time}}</li>"
          } else {
