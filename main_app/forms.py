@@ -48,8 +48,8 @@ class OpeningHoursMultiWidget(forms.MultiWidget):
     def __init__(self, attrs=None):
         self.template_name = 'widgets/opening_hours.html'
         widgets = (SliderWidget(attrs={'class': 'time_enabled'}),
-                   TimeWidget(attrs={'class': 'time', 'style': 'visibility: hidden'}),
-                   TimeWidget(attrs={'class': 'time', 'style': 'visibility: hidden'}))
+                   TimeWidget(attrs={'class': 'time', 'style': 'visibility: hidden', 'value': '09:00'}),
+                   TimeWidget(attrs={'class': 'time', 'style': 'visibility: hidden', 'value': '17:00'}))
         super(OpeningHoursMultiWidget, self).__init__(widgets, attrs)
     
     def decompress(self, value):
