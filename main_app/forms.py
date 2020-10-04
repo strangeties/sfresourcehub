@@ -26,15 +26,6 @@ class USPhoneNumberMultiWidget(forms.MultiWidget):
         values = super(USPhoneNumberMultiWidget, self).value_from_datadict(data, files, name)
         return u'+1 (%s)-%s-%s' % (values[0], values[1], values[2])
 
-class SliderWidget(forms.CheckboxInput):
-    class Media:
-        css = {
-            'all': ('CSS/slider.css',)
-        }
-    def __init__(self, attrs=None):
-        forms.CheckboxInput.__init__(self, attrs)
-        self.template_name = 'widgets/slider.html'
-
 class TimeWidget(forms.TimeInput):
     def __init__(self, attrs=None):
         if attrs == None:
@@ -47,9 +38,9 @@ class OpeningHoursMultiWidget(forms.MultiWidget):
         js = ('js/weekly_opening_hours.js',)
     def __init__(self, attrs=None):
         self.template_name = 'widgets/opening_hours.html'
-        widgets = (SliderWidget(attrs={'class': 'time_enabled'}),
-                   TimeWidget(attrs={'class': 'time', 'style': 'visibility: hidden'}),
-                   TimeWidget(attrs={'class': 'time', 'style': 'visibility: hidden'}))
+        widgets = (forms.CheckboxInput(attrs={'class': 'time_enabled', 'style': 'visibility: hidden'}),
+                   TimeWidget(attrs={'class': 'time', 'value': '09:00'}),
+                   TimeWidget(attrs={'class': 'time', 'value': '17:00', 'prefix': ' to '}))
         super(OpeningHoursMultiWidget, self).__init__(widgets, attrs)
     
     def decompress(self, value):
@@ -67,13 +58,13 @@ class OpeningHoursMultiWidget(forms.MultiWidget):
 class WeeklyOpeningHoursMultiWidget(forms.MultiWidget):
     def __init__(self, attrs=None):
         self.template_name = 'widgets/weekly_opening_hours.html'
-        widgets = (OpeningHoursMultiWidget(attrs={'weekday': 'Monday'}),
-                   OpeningHoursMultiWidget(attrs={'weekday': 'Tuesday'}),
-                   OpeningHoursMultiWidget(attrs={'weekday': 'Wednesday'}),
-                   OpeningHoursMultiWidget(attrs={'weekday': 'Thursday'}),
-                   OpeningHoursMultiWidget(attrs={'weekday': 'Friday'}),
-                   OpeningHoursMultiWidget(attrs={'weekday': 'Saturday'}),
-                   OpeningHoursMultiWidget(attrs={'weekday': 'Sunday'}))
+        widgets = (OpeningHoursMultiWidget(attrs={'weekday': 'Monday', 'closed_text': 'closed', 'weekday_id': 'opening_hours_weekday_0', 'hours_id': 'opening_hours_times_0', 'style': 'visibility: hidden'}),
+                   OpeningHoursMultiWidget(attrs={'weekday': 'Tuesday', 'closed_text': 'closed', 'weekday_id': 'opening_hours_weekday_1', 'hours_id': 'opening_hours_times_1', 'style': 'visibility: hidden'}),
+                   OpeningHoursMultiWidget(attrs={'weekday': 'Wednesday', 'closed_text': 'closed', 'weekday_id': 'opening_hours_weekday_2', 'hours_id': 'opening_hours_times_2', 'style': 'visibility: hidden'}),
+                   OpeningHoursMultiWidget(attrs={'weekday': 'Thursday', 'closed_text': 'closed', 'weekday_id': 'opening_hours_weekday_3', 'hours_id': 'opening_hours_times_3', 'style': 'visibility: hidden'}),
+                   OpeningHoursMultiWidget(attrs={'weekday': 'Friday', 'closed_text': 'closed', 'weekday_id': 'opening_hours_weekday_4', 'hours_id': 'opening_hours_times_4', 'style': 'visibility: hidden'}),
+                   OpeningHoursMultiWidget(attrs={'weekday': 'Saturday', 'closed_text': 'closed', 'weekday_id': 'opening_hours_weekday_5', 'hours_id': 'opening_hours_times_5', 'style': 'visibility: hidden'}),
+                   OpeningHoursMultiWidget(attrs={'weekday': 'Sunday', 'closed_text': 'closed', 'weekday_id': 'opening_hours_weekday_6', 'hours_id': 'opening_hours_times_6', 'style': 'visibility: hidden'}))
         super(WeeklyOpeningHoursMultiWidget, self).__init__(widgets, attrs)
 
     def decompress(self, value):
