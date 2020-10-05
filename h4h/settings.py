@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+import django_heroku
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -126,3 +127,6 @@ EMAIL_PORT = '587'
 EMAIL_HOST_USER = 'sfresourcehub@gmail.com'
 EMAIL_HOST_PASSWORD = 'SF-Re*Hub20'
 EMAIL_USE_TLS = True
+
+
+django_heroku.settings(locals())
