@@ -5,7 +5,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 
-WEEKDAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+WEEKDAYS = ["monday", "tuesday", "wednesday",
+            "thursday", "friday", "saturday", "sunday"]
+
 
 class OpeningHours(object):
     def __init__(self, enabled, opening_time, closing_time):
@@ -13,22 +15,27 @@ class OpeningHours(object):
         self.opening_time = opening_time
         self.closing_time = closing_time
 
+
 class WeeklyOpeningHours(object):
     def __init__(self, opening_hours_array):
         self.opening_hours = {}
         for i in range(len(WEEKDAYS)):
             self.opening_hours[WEEKDAYS[i]] = opening_hours_array[i]
 
+
 def parse_weekly_opening_hours(value):
     opening_hours = []
     for weekday in WEEKDAYS:
-        match = re.search('\(%s ([0-9][0-9]:[0-9][0-9]) ([0-9][0-9]:[0-9][0-9])\)'%weekday, value)
+        match = re.search(
+            '\(%s ([0-9][0-9]:[0-9][0-9]) ([0-9][0-9]:[0-9][0-9])\)' % weekday, value)
         if match:
-            opening_hours.append(OpeningHours(True, match.group(1), match.group(2)))
+            opening_hours.append(OpeningHours(
+                True, match.group(1), match.group(2)))
         else:
-            opening_hours.append(OpeningHours(False, '00:00', '00:00')) 
+            opening_hours.append(OpeningHours(False, '00:00', '00:00'))
     return WeeklyOpeningHours(opening_hours)
-        
+
+
 class WeeklyOpeningHoursField(models.Field):
     def __init__(self, *args, **kwargs):
         kwargs['max_length'] = 512
@@ -58,8 +65,8 @@ class WeeklyOpeningHoursField(models.Field):
         opening_hours_str_list = []
         for weekday in WEEKDAYS:
             if value.opening_hours[weekday].enabled:
-               opening_hours_str_list.append('%s %s %s'%(value.opening_hours[weekday].opening_time,
-                                                         value.opening_hours[weekday].closing_time))
+                opening_hours_str_list.append('%s %s %s' % (value.opening_hours[weekday].opening_time,
+                                                            value.opening_hours[weekday].closing_time))
         return ''.join(opening_hours_str_list)
 
     def get_db_prep_value(self, value, connection, prepared=False):
@@ -71,15 +78,16 @@ class WeeklyOpeningHoursField(models.Field):
         opening_hours_str_list = []
         for weekday in WEEKDAYS:
             if value.opening_hours[weekday].enabled:
-               opening_hours_str_list.append('%s %s %s'%(value.opening_hours[weekday].opening_time,
-                                                         value.opening_hours[weekday].closing_time))
+                opening_hours_str_list.append('%s %s %s' % (value.opening_hours[weekday].opening_time,
+                                                            value.opening_hours[weekday].closing_time))
         return ''.join(opening_hours_str_list)
 
     def formfield(self, **kwargs):
         defaults = {'form_class': forms.CharField}
         defaults.update(kwargs)
-        return super().formfield(**defaults) 
-    
+        return super().formfield(**defaults)
+
+
 class Resource(models.Model):
     # constants for the enum field, category.
     UNKNOWN = "UNKNOWN"
@@ -111,7 +119,7 @@ class Resource(models.Model):
     resource_name = models.CharField(max_length=100)
     # TODO: org_name can be a ForeignKey.
     org_name = models.CharField(max_length=100, blank=True)
-    category = models.CharField(max_length=100, 
+    category = models.CharField(max_length=100,
                                 choices=CATEGORIES,
                                 default=UNKNOWN)
 
@@ -125,7 +133,7 @@ class Resource(models.Model):
     postal_code = models.CharField(max_length=10, blank=True)
     long = models.DecimalField(max_digits=12, decimal_places=6)
     lat = models.DecimalField(max_digits=12, decimal_places=6)
-    phone = models.CharField(max_length=16)
+    phone = models.CharField(max_length=20)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     url = models.CharField(max_length=200, blank=True)
     notes = models.TextField(max_length=250, blank=True)

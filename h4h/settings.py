@@ -126,12 +126,3 @@ EMAIL_PORT = '587'
 EMAIL_HOST_USER = 'sfresourcehub@gmail.com'
 EMAIL_HOST_PASSWORD = 'SF-Re*Hub20'
 EMAIL_USE_TLS = True
-
-
-# SENDGRID_API_KEY = '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'
-# EMAIL_HOST = 'smtp.sendgrid.net'
-# EMAIL_HOST_USER = 'sfresourcehub@gmail.com'
-# EMAIL_HOST_PASSWORD = 'Sfhub2020'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

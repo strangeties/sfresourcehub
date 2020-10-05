@@ -1,6 +1,6 @@
 
 from .forms import ContactForm  # Add this
-from .forms import AddResourceForm # Add this
+from .forms import AddResourceForm  # Add this
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Resource
 from django.contrib.auth.forms import UserCreationForm
@@ -23,6 +23,7 @@ def about(request):
 def resources_index(request):
     resources = Resource.objects.all()
     return render(request, 'resources/index.html', {'resources': resources})
+
 
 def resourceView(request):
     error_message = ''
@@ -51,12 +52,13 @@ def resourceView(request):
             r.save()
             return redirect('index')
         else:
-           print('!form.is_valid')
-           print(form.errors)
-           error_message = form.errors
+            print('!form.is_valid')
+            print(form.errors)
+            error_message = form.errors
     form = AddResourceForm()
     context = {'form': form}
     return render(request, 'resources/create.html', context)
+
 
 def signup(request):
     error_message = ''
@@ -125,8 +127,8 @@ def resources_detail(request, resource_id):
 
 class ResourceUpdate(LoginRequiredMixin, UpdateView):
     model = Resource
-    fields = ['resource_name', 'org_name', 'category', 'hours',
-              'notes', 'street', 'city', 'state', 'phone', 'long', 'lat', 'url']
+    fields = ['resource_name', 'org_name', 'category', 'opening_hours',
+              'address', 'phone', 'url']
 
 
 class ResourceDelete(LoginRequiredMixin, DeleteView):
