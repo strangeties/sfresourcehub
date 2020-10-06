@@ -1,16 +1,13 @@
 :root {
   --main-text-color: #282828;
-  --resource-text-color: #3399FF;
+  --resource-text-color: #3399ff;
   --faint-text-color: #505050;
 }
 
-/* Always set the map height explicitly to define the size of the div
- * element that contains the map. */
 #map {
   height: 100%;
 }
 
-/* Optional: Makes the map page fill the window. */
 html,
 body {
   height: 100%;
@@ -18,7 +15,6 @@ body {
   padding: 0;
 }
 
-/* Resource Marker Markup */
 .resource_category {
   color: var(--resource-text-color);
   font-size: small;
@@ -43,6 +39,6 @@ body {
 
 /* Resource Table Markup */
 td.resource {
-  padding:8px;
-  background: -webkit-radial-gradient(circle, #f5f5dc, #ffffff); }
+  padding: 8px;
+  background: -webkit-radial-gradient(circle, #f5f5dc, #ffffff);
 }
