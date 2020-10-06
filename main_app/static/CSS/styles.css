@@ -37,7 +37,6 @@ body {
   font-size: x-small;
 }
 
-/* Resource Table Markup */
 td.resource {
   padding: 8px;
   background: -webkit-radial-gradient(circle, #f5f5dc, #ffffff);

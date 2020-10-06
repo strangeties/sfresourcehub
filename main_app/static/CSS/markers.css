@@ -1,6 +1,6 @@
 :root {
   --main-text-color: #282828;
-  --resource-text-color: #3399FF;
+  --resource-text-color: #3399ff;
   --faint-text-color: #505050;
 }
 
@@ -18,7 +18,6 @@ body {
   padding: 0;
 }
 
-/* Resource Marker Markup */
 .resource_category {
   color: var(--resource-text-color);
   font-size: small;
@@ -41,8 +40,7 @@ body {
   font-size: x-small;
 }
 
-/* Resource Table Markup */
 td {
-  padding:8px;
-  background: -webkit-radial-gradient(circle, #f5f5dc, #ffffff); }
+  padding: 8px;
+  background: -webkit-radial-gradient(circle, #f5f5dc, #ffffff);
 }
