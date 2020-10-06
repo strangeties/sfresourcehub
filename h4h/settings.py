@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+import mimetypes
 import django_heroku
 import os
 
@@ -130,3 +131,6 @@ EMAIL_USE_TLS = True
 
 
 django_heroku.settings(locals())
+
+
+mimetypes.add_type("text/css", ".css", True)
