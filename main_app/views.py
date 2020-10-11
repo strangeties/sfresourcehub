@@ -1,4 +1,3 @@
-
 from .forms import ContactForm  # Add this
 from .forms import AddResourceForm  # Add this
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -81,9 +80,12 @@ def contactView(request):
     else:
         form = ContactForm(request.POST)
         if form.is_valid():
-            subject = form.cleaned_data['subject']
+            subject = 'Resource HUB: ' + form.cleaned_data['subject']
             sender = form.cleaned_data['from_email']
-            message = form.cleaned_data['message']
+            message = '''
+Sender: %s
+Message: %s
+            '''%(sender, form.cleaned_data['message'])
             recipent = ['sfresourcehub@gmail.com']
             try:
                 send_mail(subject, message, sender,
@@ -96,7 +98,6 @@ def contactView(request):
 
 def successView(request):
     return HttpResponse('Success! Thank you for your message.')
-
 
 # def contact(request):
 #     if request.method == "POST":
