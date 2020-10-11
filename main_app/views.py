@@ -125,9 +125,8 @@ def resources_detail(request, resource_id):
 
 class ResourceUpdate(LoginRequiredMixin, UpdateView):
     model = Resource
-    fields = ['resource_name', 'org_name', 'category', 'hours',
-              'notes', 'street', 'city', 'state', 'phone', 'long', 'lat', 'url']
 
+    fields = ['resource_name', 'org_name', 'category', 'opening_hours', 'address', 'street_number', 'street_name', 'city', 'state', 'country', 'postal_code', 'long', 'lat', 'phone', 'url', 'notes']
 
 class ResourceDelete(LoginRequiredMixin, DeleteView):
     model = Resource
