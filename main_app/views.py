@@ -92,9 +92,10 @@ Message: %s
                           recipent, fail_silently=True)
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
-            return HttpResponse('Success! Thank you for your message.')
+            return render(request, "email_success.html", {'subject': form.cleaned_data['subject'],
+                                                          'message': form.cleaned_data['message'],
+                                                          'sender': sender})
     return render(request, "email.html", {'form': form})
-
 
 def successView(request):
     return HttpResponse('Success! Thank you for your message.')
