@@ -2,6 +2,8 @@ import re
 
 from .models import OpeningHours
 from .models import Resource
+from .models import DEFAULT_CLOSING_TIME
+from .models import DEFAULT_OPENING_TIME
 from .models import WEEKDAYS
 from .models import WeeklyOpeningHours
 from django import forms
@@ -43,8 +45,8 @@ class OpeningHoursMultiWidget(forms.MultiWidget):
     def __init__(self, attrs=None):
         self.template_name = 'widgets/opening_hours.html'
         widgets = {'enabled': forms.CheckboxInput(attrs={'class': 'time_enabled', 'style': 'visibility: hidden'}),
-                   'opening_time': TimeWidget(attrs={'class': 'time', 'value': '09:00'}),
-                   'closing_time': TimeWidget(attrs={'class': 'time', 'value': '17:00', 'prefix': ' to '})}
+                   'opening_time': TimeWidget(attrs={'class': 'time', 'value': DEFAULT_OPENING_TIME}),
+                   'closing_time': TimeWidget(attrs={'class': 'time', 'value': DEFAULT_CLOSING_TIME, 'prefix': ' to '})}
         super(OpeningHoursMultiWidget, self).__init__(widgets, attrs)
     
     def decompress(self, value):

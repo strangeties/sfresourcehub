@@ -7,7 +7,8 @@ from django.urls import reverse
 
 WEEKDAYS = ["monday", "tuesday", "wednesday",
             "thursday", "friday", "saturday", "sunday"]
-
+DEFAULT_OPENING_TIME = '09:00'
+DEFAULT_CLOSING_TIME = '17:00'
 
 class OpeningHours(object):
     def __init__(self, enabled, opening_time, closing_time):
@@ -32,7 +33,7 @@ def parse_weekly_opening_hours(value):
             opening_hours.append(OpeningHours(
                 True, match.group(1), match.group(2)))
         else:
-            opening_hours.append(OpeningHours(False, '00:00', '00:00'))
+            opening_hours.append(OpeningHours(False, DEFAULT_OPENING_TIME, DEFAULT_CLOSING_TIME))
     return WeeklyOpeningHours(opening_hours)
 
 
@@ -65,7 +66,8 @@ class WeeklyOpeningHoursField(models.Field):
         opening_hours_str_list = []
         for weekday in WEEKDAYS:
             if value.opening_hours[weekday].enabled:
-                opening_hours_str_list.append('%s %s %s' % (value.opening_hours[weekday].opening_time,
+                opening_hours_str_list.append('%s %s %s' % (weekday,
+                                                            value.opening_hours[weekday].opening_time,
                                                             value.opening_hours[weekday].closing_time))
         return ''.join(opening_hours_str_list)
 
