@@ -131,6 +131,3 @@ EMAIL_USE_TLS = True
 
 
 django_heroku.settings(locals())
-
-
-mimetypes.add_type("text/css", ".css", True)
