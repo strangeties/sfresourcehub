@@ -27,10 +27,8 @@ def resources_index(request):
 def resourceView(request):
     error_message = ''
     if request.method == 'POST':
-        print('resourceView: POST')
         form = AddResourceForm(request.POST)
         if form.is_valid():
-            print('form.is_valid')
             r = Resource(resource_name=form.cleaned_data['resource_name'],
                          org_name=form.cleaned_data['org_name'],
                          category=form.cleaned_data['category'],
@@ -57,7 +55,6 @@ def resourceView(request):
     form = AddResourceForm()
     context = {'form': form}
     return render(request, 'resources/create.html', context)
-
 
 def signup(request):
     error_message = ''
@@ -126,11 +123,10 @@ def resources_detail(request, resource_id):
             'resource': resource
         })
 
-
 class ResourceUpdate(LoginRequiredMixin, UpdateView):
+    template_name = 'resources/update.html'
     model = Resource
-
-    fields = ['resource_name', 'org_name', 'category', 'opening_hours', 'address', 'street_number', 'street_name', 'city', 'state', 'country', 'postal_code', 'long', 'lat', 'phone', 'url', 'notes']
+    form_class = AddResourceForm
 
 class ResourceDelete(LoginRequiredMixin, DeleteView):
     model = Resource

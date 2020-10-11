@@ -1,3 +1,5 @@
+import re
+
 from .models import OpeningHours
 from .models import Resource
 from .models import WEEKDAYS
@@ -19,7 +21,9 @@ class USPhoneNumberMultiWidget(forms.MultiWidget):
 
     def decompress(self, value):
         if value:
-            return value.split('-')
+            matches = re.split("\+1 \(([0-9]+)\)-([0-9]+)-([0-9]+)", value)
+            if (matches and len(matches) == 5):
+            	return [matches[1], matches[2], matches[3]]
         return [None,None,None]
 
     def value_from_datadict(self, data, files, name):
@@ -45,13 +49,13 @@ class OpeningHoursMultiWidget(forms.MultiWidget):
     
     def decompress(self, value):
         if value:
-          return value.split('-')
+            return [value.enabled, value.opening_time, value.closing_time]
         return [None,None,None]
 
     def value_from_datadict(self, data, files, name):
         values = super(OpeningHoursMultiWidget, self).value_from_datadict(data, files, name)
         if values[0]:
-          return '%s %s'%(values[1], values[2])
+             return '%s %s'%(values[1], values[2])
         else:
           return None
 
@@ -69,8 +73,11 @@ class WeeklyOpeningHoursMultiWidget(forms.MultiWidget):
 
     def decompress(self, value):
         if value:
-            return value.split('-')
-        return [None,None,None,None,None,None,None]
+            values = []
+            for i in range(len(WEEKDAYS)):
+                values.append(value.opening_hours[WEEKDAYS[i]])
+            return values
+        return [None, None, None, None, None, None, None]
 
     def value_from_datadict(self, data, files, name):
         values = super(WeeklyOpeningHoursMultiWidget, self).value_from_datadict(data, files, name)
@@ -84,7 +91,25 @@ class ContactForm(forms.Form):
     subject = forms.CharField(required=True)
     message = forms.CharField(widget=forms.Textarea, required=True)
 
-class AddResourceForm(forms.Form):
+class AddResourceForm(forms.ModelForm):
+    class Meta:
+        model = Resource
+        fields = ('resource_name',
+                  'org_name',
+                  'category',
+                  'opening_hours',
+                  'phone',
+                  'address',
+                  'street_number',
+                  'street_name',
+                  'city',
+                  'state',
+                  'country',
+                  'postal_code',
+                  'long',
+                  'lat',
+                  'url',
+                  'notes')
     resource_name = forms.CharField(max_length=100, required=True)
     org_name = forms.CharField(max_length=100, required=True)
     category = forms.ChoiceField(choices=Resource.CATEGORIES)
