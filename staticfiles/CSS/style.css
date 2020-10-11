@@ -1,0 +1,43 @@
+.container-fluid {
+  padding-right: 0;
+  padding-left: 0;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.container {
+  padding-bottom: 20px;
+}
+
+.card-content {
+  color: black;
+}
+
+.card {
+  width: 400px;
+  padding-left: 50px;
+  margin-left: 35%;
+}
+
+h1 {
+  text-align: center;
+  color: #14a3b8;
+}
+
+form {
+  color: #14a3b8;
+  padding-left: 20px;
+}
+
+th {
+  padding-right: 20px;
+  vertical-align: top;
+  text-align: top;
+}
+
+.update {
+  background-color: #14a3b8;
+  color: black;
+  padding-left: 20px;
+  padding-right: 20px;
+}
