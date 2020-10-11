@@ -3,20 +3,21 @@
 <h1>Resource Details</h1>
         <div class="card">
             <div class="card-content">
-                <span class="card-title">NGO: {{ resource.user }}</span>
+                <span class="card-title">User: {{ resource.user }}</span>
+                <p>Organization: {{ resource.org_name }}</p>
                 <p>Resource: {{ resource.resource_name }}</p>
                 <p>Category: {{ resource.category }}</p>
-                <p>Hours: {{ resource.hours }}</p>
-                <p>Street: {{ resource.street}}</p>
+                <p>Address: {{ resource.address}}</p>
                 <p>City: {{ resource.city}}</p>
                 <p>State: {{ resource.state }}</p>
                 <p>Phone: {{ resource.phone}}</p>
-                <a href="{{ resource.url }}">Website: {{ resource.url}}</a>
+                <p>Website</p><a href="{{ resource.url }}">{{ resource.url}}</a>
+                <p>Notes: {{ resource.notes}}</p>
             </div>
             {% if request.user %}
             <div class="card-action">
-                <a href="{% url 'resources_update' resource.id %}">Edit</a>
-                <a href="{% url 'resources_delete' resource.id %}">Delete</a>
+                <a class="btn btn-info my-2"href="{% url 'resources_update' resource.id %}">Edit</a>
+                <a class="btn btn-info my-2" href="{% url 'resources_delete' resource.id %}">Delete</a>
             </div>
             {% endif %}
         </div>

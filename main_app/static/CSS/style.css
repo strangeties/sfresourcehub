@@ -82,6 +82,12 @@ th {
   text-align: top;
 }
 
+.update {
+  background-color: #14a3b8;
+  color: black;
+  padding-left: 20px;
+  padding-right: 20px;
+}
 /*.btn {*/
 /*  background-color: green;*/
 /*}*/

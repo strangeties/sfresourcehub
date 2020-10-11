@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+import django_heroku
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -128,10 +129,4 @@ EMAIL_HOST_PASSWORD = 'SF-Re*Hub20'
 EMAIL_USE_TLS = True
 
 
-# SENDGRID_API_KEY = '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'
-# EMAIL_HOST = 'smtp.sendgrid.net'
-# EMAIL_HOST_USER = 'sfresourcehub@gmail.com'
-# EMAIL_HOST_PASSWORD = 'Sfhub2020'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+django_heroku.settings(locals())
