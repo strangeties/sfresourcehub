@@ -32,49 +32,48 @@
     ></script>
     <script>
 
-      <!--      gets paths to icon images-->
 
-            const icons = [
-            "{% static 'images/icons/food.gif' %}",
-            "{% static 'images/icons/clothing.gif' %}",
-            "{% static 'images/icons/addiction_recovery.gif' %}",
-            "{% static 'images/icons/hygiene.gif' %}",
-            "{% static 'images/icons/financial_empowerment.gif' %}",
-            "{% static 'images/icons/shelter.gif' %}",
-            "{% static 'images/icons/women_and_children.gif' %}",
-            "{% static 'images/icons/mental_health.gif' %}",
-            "{% static 'images/icons/medical_assistance.gif' %}"
-          ];
+        const icons = [
+        "{% static 'images/icons/food.gif' %}",
+        "{% static 'images/icons/clothing.gif' %}",
+        "{% static 'images/icons/addiction_recovery.gif' %}",
+        "{% static 'images/icons/hygiene.gif' %}",
+        "{% static 'images/icons/financial_empowerment.gif' %}",
+        "{% static 'images/icons/shelter.gif' %}",
+        "{% static 'images/icons/women_and_children.gif' %}",
+        "{% static 'images/icons/mental_health.gif' %}",
+        "{% static 'images/icons/medical_assistance.gif' %}"
+      ];
 
-           const default_icon = "{% static 'images/icons/default.gif' %}"
+       const default_icon = "{% static 'images/icons/default.gif' %}"
 
-      <!--    places resources in a JS array-->
-            resources_from_database = []
-            {% for resource in resources %}
-            opening_hours = "<ul>"
-            {% for key, value in resource.opening_hours.opening_hours.items %}
-               if ("{{value.enabled}}" == "True") {
-                 opening_hours += "<li>{{key}}: {{value.opening_time}} - {{value.closing_time}}</li>"
-               } else {
-                 opening_hours += "<li>{{key}}: closed</li>"
-               }
-            {% endfor %}
-            opening_hours += "\n<ul>"
+        resources_from_database = []
 
-            r = {
-              resource_name: "{{resource.resource_name}}",
-              org_name: "{{resource.org_name}}",
-              category: "{{resource.category}}",
-              hrs: opening_hours,
-              link: "{{resource.url}}",
-              notes: "{{resource.notes}}",
-              address: "{{resource.address}}",
-              lat: {{resource.lat}},
-              long: {{resource.long}},
-              phone: "{{resource.phone}}",
-            }
-            resources_from_database.push(r)
+      {% for resource in resources %}
+        opening_hours = "<ul>"
+          {% for key, value in resource.opening_hours.opening_hours.items %}
+           if ("{{value.enabled}}" == "True") {
+             opening_hours += "<li>{{key}}: {{value.opening_time}} - {{value.closing_time}}</li>"
+           } else {
+             opening_hours += "<li>{{key}}: closed</li>"
+           }
           {% endfor %}
+        opening_hours += "\n<ul>"
+
+        r = {
+          resource_name: "{{resource.resource_name}}",
+          org_name: "{{resource.org_name}}",
+          category: "{{resource.category}}",
+          hrs: opening_hours,
+          link: "{{resource.url}}",
+          notes: "{{resource.notes}}",
+          address: "{{resource.address}}",
+          lat: "{{resource.lat}}",
+          long: "{{resource.long}}",
+          phone: "{{resource.phone}}",
+        }
+        resources_from_database.push(r)
+      {% endfor %}
     </script>
     <script src="{% static 'js/resources.js' %}"></script>
     <script src="{% static 'js/markers.js' %}"></script>
