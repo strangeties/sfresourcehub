@@ -52,6 +52,7 @@ def resourceView(request):
             print('!form.is_valid')
             print(form.errors)
             error_message = form.errors
+    print("resourceView: requesting!")
     form = AddResourceForm()
     context = {'form': form}
     return render(request, 'resources/create.html', context)
