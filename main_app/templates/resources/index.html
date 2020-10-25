@@ -84,6 +84,7 @@
   <body>
     <h1>Resources</h1>
     <div id="map"></div>
+    <br>
     {% for resource in resources %}
         {% if request.user %}
             <a href="{% url 'detail' resource.id %}">
