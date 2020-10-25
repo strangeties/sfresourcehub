@@ -26,6 +26,7 @@ class USPhoneNumberMultiWidget(forms.MultiWidget):
             matches = re.split("\+1 \(([0-9]+)\)-([0-9]+)-([0-9]+)", value)
             if (matches and len(matches) == 5):
             	return [matches[1], matches[2], matches[3]]
+        print('USPhoneNumberMultiWidget: decompress: nothing was returned')
         return [None,None,None]
 
     def value_from_datadict(self, data, files, name):
@@ -44,13 +45,14 @@ class OpeningHoursMultiWidget(forms.MultiWidget):
         js = ('js/weekly_opening_hours.js',)
     def __init__(self, attrs=None):
         self.template_name = 'widgets/opening_hours.html'
-        widgets = {'enabled': forms.CheckboxInput(attrs={'class': 'time_enabled', 'style': 'visibility: hidden'}),
-                   'opening_time': TimeWidget(attrs={'class': 'time', 'value': DEFAULT_OPENING_TIME}),
-                   'closing_time': TimeWidget(attrs={'class': 'time', 'value': DEFAULT_CLOSING_TIME, 'prefix': ' to '})}
+        widgets = [forms.CheckboxInput(attrs={'class': 'time_enabled', 'style': 'visibility: hidden'}),
+                   TimeWidget(attrs={'class': 'time', 'value': DEFAULT_OPENING_TIME}),
+                   TimeWidget(attrs={'class': 'time', 'value': DEFAULT_CLOSING_TIME, 'prefix': ' to '})]
         super(OpeningHoursMultiWidget, self).__init__(widgets, attrs)
     
     def decompress(self, value):
         if value:
+            print('OpeningHoursMultiWidget: decompress: %d, %s, %s'%(value.enabled, value.opening_time, value.closing_time))
             return [value.enabled, value.opening_time, value.closing_time]
         return [None,None,None]
 
@@ -71,15 +73,15 @@ def get_widget_attributes(i):
 class WeeklyOpeningHoursMultiWidget(forms.MultiWidget):
     def __init__(self, attrs=None):
         self.template_name = 'widgets/weekly_opening_hours.html'
-        widgets = {}
+        widgets = []
         for i in range(len(WEEKDAYS)):
-            widgets[WEEKDAYS[i]] = OpeningHoursMultiWidget(attrs=get_widget_attributes(i))
+            widgets.append(OpeningHoursMultiWidget(attrs=get_widget_attributes(i)))
         super(WeeklyOpeningHoursMultiWidget, self).__init__(widgets, attrs)
 
     def decompress(self, value):
         if value:
             values = []
-            widgets = {}
+            widgets = []
             for i in range(len(WEEKDAYS)):
                 opening_hours = value.opening_hours[WEEKDAYS[i]]
                 values.append(opening_hours)
@@ -87,7 +89,7 @@ class WeeklyOpeningHoursMultiWidget(forms.MultiWidget):
                 if opening_hours.enabled:
                     attrs['closed_text'] = ''
                     attrs.pop('style', None)
-                widgets[WEEKDAYS[i]] = OpeningHoursMultiWidget(attrs=attrs)
+                widgets.append(OpeningHoursMultiWidget(attrs=attrs))
 
             super(WeeklyOpeningHoursMultiWidget, self).__init__(widgets, None)
             return values
@@ -124,6 +126,25 @@ class AddResourceForm(forms.ModelForm):
                   'lat',
                   'url',
                   'notes')
+        widgets = {
+            'resource_name': forms.TextInput(),
+            'org_name': forms.TextInput(),
+            'category': forms.Select(),
+            'opening_hours': WeeklyOpeningHoursMultiWidget(),
+            'phone': USPhoneNumberMultiWidget(),
+            'address': forms.TextInput(),
+            'street_number': forms.HiddenInput(),
+            'street_name': forms.HiddenInput(),
+            'city': forms.HiddenInput(),
+            'state': forms.HiddenInput(),
+            'country': forms.HiddenInput(),
+            'postal_code': forms.HiddenInput(),
+            'long': forms.HiddenInput(),
+            'lat': forms.HiddenInput(),
+            'url': forms.TextInput(),
+            'notes': forms.TextInput()
+        }
+'''
     resource_name = forms.CharField(max_length=100, required=True)
     org_name = forms.CharField(max_length=100, required=True)
     category = forms.ChoiceField(choices=Resource.CATEGORIES)
@@ -150,3 +171,4 @@ class AddResourceForm(forms.ModelForm):
 
     url = forms.URLField(max_length=100, required=False)
     notes = forms.CharField(max_length=250, required=False)
+'''
