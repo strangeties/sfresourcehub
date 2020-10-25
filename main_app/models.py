@@ -28,7 +28,7 @@ def parse_weekly_opening_hours(value):
     opening_hours = []
     for weekday in WEEKDAYS:
         match = re.search(
-            '\(%s ([0-9][0-9]:[0-9][0-9]) ([0-9][0-9]:[0-9][0-9])\)' % weekday, value)
+            '%s ([0-9][0-9]:[0-9][0-9]) ([0-9][0-9]:[0-9][0-9])' % weekday, value)
         if match:
             opening_hours.append(OpeningHours(
                 True, match.group(1), match.group(2)))
