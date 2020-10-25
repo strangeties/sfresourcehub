@@ -6,6 +6,7 @@ from .models import DEFAULT_CLOSING_TIME
 from .models import DEFAULT_OPENING_TIME
 from .models import WEEKDAYS
 from .models import WeeklyOpeningHours
+from .models import parse_weekly_opening_hours
 from django import forms
 
 class USPhoneNumberMultiWidget(forms.MultiWidget):
@@ -26,7 +27,6 @@ class USPhoneNumberMultiWidget(forms.MultiWidget):
             matches = re.split("\+1 \(([0-9]+)\)-([0-9]+)-([0-9]+)", value)
             if (matches and len(matches) == 5):
             	return [matches[1], matches[2], matches[3]]
-        print('USPhoneNumberMultiWidget: decompress: nothing was returned')
         return [None,None,None]
 
     def value_from_datadict(self, data, files, name):
@@ -52,7 +52,6 @@ class OpeningHoursMultiWidget(forms.MultiWidget):
     
     def decompress(self, value):
         if value:
-            print('OpeningHoursMultiWidget: decompress: %d, %s, %s'%(value.enabled, value.opening_time, value.closing_time))
             return [value.enabled, value.opening_time, value.closing_time]
         return [None,None,None]
 
@@ -80,10 +79,14 @@ class WeeklyOpeningHoursMultiWidget(forms.MultiWidget):
 
     def decompress(self, value):
         if value:
+            if (isinstance(value, str)):
+                v = parse_weekly_opening_hours(value)
+            else:
+                v = value
             values = []
             widgets = []
             for i in range(len(WEEKDAYS)):
-                opening_hours = value.opening_hours[WEEKDAYS[i]]
+                opening_hours = v.opening_hours[WEEKDAYS[i]]
                 values.append(opening_hours)
                 attrs = get_widget_attributes(i)
                 if opening_hours.enabled:
@@ -144,7 +147,6 @@ class AddResourceForm(forms.ModelForm):
             'url': forms.TextInput(),
             'notes': forms.TextInput()
         }
-'''
     resource_name = forms.CharField(max_length=100, required=True)
     org_name = forms.CharField(max_length=100, required=True)
     category = forms.ChoiceField(choices=Resource.CATEGORIES)
@@ -171,4 +173,3 @@ class AddResourceForm(forms.ModelForm):
 
     url = forms.URLField(max_length=100, required=False)
     notes = forms.CharField(max_length=250, required=False)
-'''
