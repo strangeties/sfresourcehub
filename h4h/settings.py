@@ -115,7 +115,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-
+STATIC_ROOT=os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/resources/'
 
@@ -127,6 +127,5 @@ EMAIL_PORT = '587'
 EMAIL_HOST_USER = 'sfresourcehub@gmail.com'
 EMAIL_HOST_PASSWORD = 'SF-Re*Hub20'
 EMAIL_USE_TLS = True
-
 
 django_heroku.settings(locals())
