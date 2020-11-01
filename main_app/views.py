@@ -10,6 +10,7 @@ from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -134,3 +135,15 @@ class ResourceUpdate(LoginRequiredMixin, UpdateView):
 class ResourceDelete(LoginRequiredMixin, DeleteView):
     model = Resource
     success_url = '/resources/'
+
+
+@login_required
+def myresources(request):
+    myresources = Resource.objects.filter(user=request.user)
+    return render(request, 'resources/myindex.html', {
+        'myresources': myresources,
+    })
+
+
+def resources_categories(request):
+    return render(request, 'categories.html')

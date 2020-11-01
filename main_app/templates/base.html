@@ -53,7 +53,12 @@
             </li>
             <li class="nav-item">
               <a class="nav-link text-white" href="{% url 'index' %}"
-                >Find Resources</a
+                >View All Resources</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'category' %}"
+                >Find Resources by category</a
               >
             </li>
             <li>
@@ -66,6 +71,7 @@
                 >Add Resource</a
               >
             </li>
+            <li class="nav-item"><a class="nav-link text-white" href="{% url 'myresource' %}">View My Resources</a></li>
             <li class="nav-item">
               <a class="btn btn-info my-2" href="{% url 'logout' %}"
                 >Logout</a
