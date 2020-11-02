@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>My Resource</h1>
+{% if not myresources %}
+<p>No Resources yet!</p>
+<a href="{% url 'resources_create' %}">ADD RESOURCES</a>
+{% else %} {% for resource in myresources %}
+<div class="card">
+  <a href="{% url 'detail' resource.id %}">
+    <div class="card-content">
+      <span class="card-title">{{ resource.resource_name }}</span>
+      <p>Category: {{ resource.category }}</p>
+      <p>Website: {{ resource.url }}</p>
+      <p>City: {{ resource.city}}</p>
+      <p>Notes: {{ resource.notes }}</p>
+    </div>
+  </a>
+</div>
+{% endfor %} {% endif %} {% endblock %}

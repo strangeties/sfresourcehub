@@ -6,6 +6,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
     path('resources/', views.resources_index, name='index'),
+    path('resources/categories', views.resources_categories, name='category'),
     path('accounts/signup/', views.signup, name='signup'),
     path('resources/create/', resourceView, name='resources_create'),
     path('contact/', contactView, name='contact'),
@@ -16,4 +17,5 @@ urlpatterns = [
          views.ResourceUpdate.as_view(), name='resources_update'),
     path('resources/<int:pk>/delete/',
          views.ResourceDelete.as_view(), name='resources_delete'),
+    path('myresources/', views.myresources, name='myresource'),
 ]
