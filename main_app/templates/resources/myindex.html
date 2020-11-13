@@ -5,14 +5,19 @@
 <p>No Resources yet!</p>
 <a href="{% url 'resources_create' %}">ADD RESOURCES</a>
 {% else %} {% for resource in myresources %}
-<div class="card">
+<div
+  class="card text-center shadow-lg p-3 mb-5 bg-white rounded"
+  id="card"
+  style="width: 18rem"
+>
   <a href="{% url 'detail' resource.id %}">
     <div class="card-content">
-      <span class="card-title">{{ resource.resource_name }}</span>
+      <span class="card-title">{{ resource.org_name }}</span>
+      <p>Resource: {{ resource.resource_name }}</p>
       <p>Category: {{ resource.category }}</p>
-      <p>Website: {{ resource.url }}</p>
       <p>City: {{ resource.city}}</p>
-      <p>Notes: {{ resource.notes }}</p>
+      <p>Website</p>
+      <a href="{{ resource.url }}">{{ resource.url}}</a>
     </div>
   </a>
 </div>
