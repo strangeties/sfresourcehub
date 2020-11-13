@@ -15,8 +15,8 @@
 
 .card {
   width: 400px;
-  padding-left: 50px;
-  margin-left: 35%;
+  padding-left: 70px;
+  margin-left: 45%;
 }
 
 h1 {
@@ -40,4 +40,8 @@ th {
   color: black;
   padding-left: 20px;
   padding-right: 20px;
+}
+
+.btn {
+  width: 25px;
 }
