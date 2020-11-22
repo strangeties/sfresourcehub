@@ -1,6 +1,6 @@
 "use strict";
 
-const tenderloinLatLng = { lat: 37.7847, lng: -122.4145 };
+const tenderloinLatLng = { lat:37.7847, lng:-122.4145 };
 
 const categories = [
   "FOOD",
@@ -36,7 +36,7 @@ function initMap() {
 
   for (var i = 0; i < resources_from_database.length; i++) {
     var resource = resources_from_database[i];
-    var resourceLatLng = { lat: resource.lat, lng: resource.long };
+    var resourceLatLng = { lat: parseFloat(resource.lat), lng: parseFloat(resource.long) };
     var category_index = categories.indexOf(resource.category);
     var category =
       category_index == -1 ? "------" : `--- ${category_names[category_index]} ---`;
@@ -71,26 +71,4 @@ function initMap() {
       })(marker, contentString, infoWindow)
     );
   }
-
-  var infoWindow = new google.maps.InfoWindow({
-    content: contentString,
-  });
-
-  var marker = new google.maps.Marker({
-    position: resourceLatLng,
-    map: map,
-    icon: category_index == -1 ? default_icon : icons[category_index],
-    title: resource.resource_name,
-  });
-
-  google.maps.event.addListener(
-    marker,
-    "click",
-    (function (marker, contentString, infowWindow) {
-      return function () {
-        infowWindow.setContent(contentString);
-        infowWindow.open(map, marker);
-      };
-    })(marker, contentString, infoWindow)
-  );
 }
