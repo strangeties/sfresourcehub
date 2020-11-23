@@ -1,68 +1,99 @@
 
     {% extends 'base.html' %} {% block content %}
     <div class="container text-center">
-      <img
-        src="/static/images/golden-gate.jpeg"
-        class="mt-4 mb-3 img-fluid" width=600 height=600
-        alt="golden gate bridge"
-      />
-      <div class="homepage-about">
-        <p>
-         
-          The SF Resource Hub is your one-stop shop to over 500 area service providers and programs in various categories including: Food, Shelter, Clothing, Mental Health Services, Medical Assistance, Financial Empowerment, and Substance Abuse Recovery. 
+     
+      <!-- Images -->
 
-          Our resource is designed to empower not only those who are in need, but the whole community so that we can all work together to make sure that everyone in our community is housed, safe, healthy, and respected. 
-        </p> 
-      </div>
-      <div class="buttons mt-5 mb-5">
-        <a class="btn btn-info my-2" href="/resources" role="button"
-          >Find Resources</a
-        >
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a class="btn btn-info my-2" href="/accounts/login" role="button"
-          >Share Resources</a
-        >
-      </div>
-      <div class="row m-1 align-items-center">
-        <div class="col-md m-1 text-center">
-          <img
-            src="../static/images/homeless-shelter-food.jpg"
-            width="400"
-            height="600"
-            class="img-fluid p-2"
-            alt="photo"
-          />
+      <div class="row m-1 align-items-center no-gutters">
+        <div class="col text-center">
+            <img src="../static/images/home-golden-gate.jpg"
+             class="img-fluid img-center"
+             style="width:100%; object-fit:cover;">
         </div>
-        <div class="col-md m-1 text-center">
-          <img
-            src="../static/images/homepic1.jpg"
-            width="400"
-            class="img-fluid p-2"
-            alt="photo"
-          />
+        <div class="col text-center">
+            <img src="../static/images/home-homeless-shelter-food.jpg"
+             class="img-fluid img-center"
+             style="width:100%; object-fit:cover;">
+        </div>
+        <div class="col text-center">
+            <img src="../static/images/home-crates.jpg"
+             class="img-fluid img-center"
+             style="width:100%; object-fit:cover;">
         </div>
       </div>
-      &nbsp;
-      <div class="row m-1 align-items-center">
-        <div class="col-md m-1 text-center">
-          <iframe
-            width="450"
-            height="400"
-            frameborder="0"
-            style="border: 0;"
-            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDtnS3D3bvBjvrLTLJJOv8xftB5Ctdgeck
-          &q=San Francisco+CA"
-            allowfullscreen
-          >
-          </iframe>
+
+      <!-- About Section -->
+      <div>
+        St. Anthony's Resource Map contains listings to service providers and programs within the Tenderloin for anyone who is in need.
+      </div>
+
+      <!-- Navigation -->
+      <div class="mt-5">
+        <div class="row">
+          Browse All Resources
         </div>
-        <div class="col-md m-1">
-          <h1>Follow Us</h1>
-          <a href="https://www.instagram.com/sfresourcehub/" ><img src="/static/images/instagram-logo.png" width="100"></a>
-          
-          <!-- contact form -->         
+        <div class="row">
+          <a href="/resources"
+           role="button">
+            <img src="../static/images/tenderloin.png"
+             class="img-fluid"
+             style="height:100%;">
+          </a>
         </div>
       </div>
+
+      <div class="mt-5">
+        <div class="row">
+          Browse Resources By Category
+        </div>
+        <div class="row">
+            <a class="btn btn-info"
+             href="/resources"
+             role="button">Food</a>
+        </div>
+        <div class="row buttons mt-2 mb-0">
+            <a class="btn btn-info"
+             href="/resources"
+             role="button">Shelter and Hygiene</a>
+        </div>
+        <div class="row buttons mt-2 mb-0">
+            <a class="btn btn-info"
+             href="/resources"
+             role="button">Medical Assistance, Addiction Recovery, and Mental Health</a>
+        </div>
+        <div class="row buttons mt-2 mb-0">
+            <a class="btn btn-info"
+             href="/resources"
+             role="button">Women and Children</a>
+          </div>
+        <div class="row buttons mt-2 mb-0">
+            <a class="btn btn-info"
+             href="/resources"
+             role="button">Clothing</a>
+        </div>
+          <div class="row buttons mt-2 mb-5">
+            <a class="btn btn-info"
+             href="/resources"
+             role="button">Financial Empowerment</a>
+        </div>
+      </div>
+
+      <div class="mt-5">
+        <div class="row">
+          Get Involved
+        </div>
+        <div class="row buttons mt-2 mb-0">
+          <a class="btn btn-info"
+             href="/resources"
+             role="button">Contact Us</a>
+        </div>
+        <div class="row buttons mt-2 mb-5">
+          <a class="btn btn-info"
+             href="/resources"
+             role="button">Log In</a>
+        </div>
+      </div>
+
     </div>
     {% endblock %}
   </body>
