@@ -2,9 +2,9 @@
     {% extends 'base.html' %} {% block content %}
     <div class="container text-center">
      
-      <!-- Images -->
-
-      <div class="row m-1 align-items-center no-gutters">
+      <!-- About Section -->
+      <div class="row m-1 align-items-center no-gutters"
+       style="background-color:#6eb2bd;">
         <div class="col text-center">
             <img src="../static/images/home-golden-gate.jpg"
              class="img-fluid img-center"
@@ -20,26 +20,26 @@
              class="img-fluid img-center"
              style="width:100%; object-fit:cover;">
         </div>
-      </div>
 
-      <!-- About Section -->
-      <div class="test_font">
-        St. Anthony's Resource Map contains listings to service providers and programs within San Francisco's Tenderloin area for anyone who is in need.
-      </div>
-
-      <!-- Navigation -->
-      <div class="mt-5">
-        <div class="row">
-          Browse All Resources
+        <div class="bold m-2" 
+         style="background-color:#6eb2bd; font-size:x-large;">
+          For anyone in need: St. Anthony's Resource Hub contains listings to service providers and programs within San Francisco's Tenderloin area.
         </div>
-        <div class="row">
+      </div>
+
+      <!-- Browse All Resources -->
+      <div class="row m-1"
+       style="background-color:#c33d31; font-size:xx-large;">
           <a href="/resources"
-           role="button">
+           role="button"
+           style="width:100%;">
+       <div class="row m-2">
+            Browse All Resources
             <img src="../static/images/tenderloin.png"
-             class="img-fluid"
-             style="height:100%;">
+             class="img-fluid img-center"
+             style="width:100%; max-height:200px; object-fit:cover;">
+       </div>
           </a>
-        </div>
       </div>
 
       <div class="mt-5">

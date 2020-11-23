@@ -13,6 +13,10 @@
   color: #6E645C;
 }
 
+.bold {
+  font-family: 'avenir-black';
+}
+
 .container-fluid {
   padding-right: 0;
   padding-left: 0;
