@@ -1,3 +1,18 @@
+@font-face {
+    font-family: 'avenir-black';
+    src: url('../fonts/avenir-black.otf') format("opentype");
+}
+
+@font-face {
+    font-family: 'avenir';
+    src: url('../fonts/avenir.ttc') format("truetype");
+}
+
+* {
+  font-family: 'avenir';
+  color: #6E645C;
+}
+
 .container-fluid {
   padding-right: 0;
   padding-left: 0;
@@ -40,11 +55,4 @@ th {
   color: black;
   padding-left: 20px;
   padding-right: 20px;
-}
-
-.btn {
-  width: 25px;
-}
-
-.homepage-about {
 }
