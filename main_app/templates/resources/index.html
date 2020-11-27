@@ -8,13 +8,8 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'css/styles.css' %}"
-    />
     <title>SF Resource Hub</title>
+
     <link
       rel="stylesheet"
       type="text/css"
@@ -31,8 +26,6 @@
       defer
     ></script>
     <script>
-
-
         const icons = [
         "{% static 'images/icons/food.gif' %}",
         "{% static 'images/icons/clothing.gif' %}",
@@ -45,7 +38,7 @@
         "{% static 'images/icons/medical_assistance.gif' %}"
       ];
 
-       const default_icon = "{% static 'images/icons/default.gif' %}"
+        const default_icon = "{% static 'images/icons/default.gif' %}"
 
         resources_from_database = []
 
@@ -84,7 +77,8 @@
     </div>
     <div class="row m-1 shadow-sm" id="map"></div>
     <br>
-    <div class="row m-1" style="width:100%;">
+    <div class="row m-1" style="width:100%;" id="resource_listings">
+<!---
     {% for resource in resources %}
         {% if request.user %}
             <a href="{% url 'detail' resource.id %}">
@@ -94,14 +88,18 @@
          id="card"
          style="">
             <div class="card-content">
-                <h5 class="card-title">{{ resource.org_name }}</h5>
-                <br/>
-                <p>Resource: {{ resource.resource_name }}</p>
-                <p>Category: {{ resource.category }}</p>
+              <div class='resource_name'>{{resource.resource_name}}</div>
+              <div class='resource_street'>offered by <div class="bold" style="display:inline;">{{resource.org_name}}</div></div>
+              <br>
+              <div class='resource_street'>{{resource.hrs}}</div>
+              <div class='resource_street'>{{resource.address}}</div>
+              <div class='resource_street'>{{resource.phone}}</div>
+              <div class='resource_notes'>{{resource.notes}}</div>
             </div>
         </div>
         </a>
     {% endfor %}
+--->
     {% endblock %}
     </div>
   </body>

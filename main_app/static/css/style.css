@@ -21,18 +21,22 @@
   color:#78291C;
 }
 
+.menu-darken-on-hover:hover {
+  background-color: #E9E9E9;
+}
+
 .darken-on-hover:hover {
   opacity:0.6;
 }
 
 .btn-home-resources, .btn-home-resources:hover {
   background-color:#D77540;
-  color:#E9E9E9;
+  color:#F8CD7F;
 }
 
 .btn-home-get-involved, .btn-home-get-involved:hover {
-  background-color:#F8CD7F;
-  color:#78291C;
+  background-color:#E9E9E9;
+  color:#6EB2BD;
 }
 
 .container-fluid {
@@ -51,14 +55,15 @@
 }
 
 .card {
-  width: 400px;
-  padding-left: 70px;
+  min-width: 200px;
+  width: 40vw 100%;
   margin-left: 45%;
 }
 
 h1 {
   text-align: center;
-  color: #14a3b8;
+  color: #6E645C;
+  width: 100%;
 }
 
 form {
