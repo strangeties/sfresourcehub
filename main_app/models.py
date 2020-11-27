@@ -5,8 +5,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 
-WEEKDAYS = ["monday", "tuesday", "wednesday",
-            "thursday", "friday", "saturday", "sunday"]
+WEEKDAYS = ["Monday", "Tuesday", "Wednesday",
+            "Thursday", "Friday", "Saturday", "Sunday"]
 DEFAULT_OPENING_TIME = '09:00'
 DEFAULT_CLOSING_TIME = '17:00'
 
@@ -23,15 +23,23 @@ class WeeklyOpeningHours(object):
         for i in range(len(WEEKDAYS)):
             self.opening_hours[WEEKDAYS[i]] = opening_hours_array[i]
 
+def convert_to_am_pm(value):
+    values = value.split(':')
+    hr = int(values[0]);
+
+    tag = 'am' if hr < 12 else 'pm';
+    hr = 12 if hr == 0 else (hr - 12 if hr > 12 else hr);
+  
+    return str(hr) + ':' + values[1] + ' ' + tag;
 
 def parse_weekly_opening_hours(value):
     opening_hours = []
     for weekday in WEEKDAYS:
         match = re.search(
-            '%s ([0-9][0-9]:[0-9][0-9]) ([0-9][0-9]:[0-9][0-9])' % weekday, value)
+            '%s ([0-9][0-9]:[0-9][0-9]) ([0-9][0-9]:[0-9][0-9])' % weekday, value, flags=re.IGNORECASE)
         if match:
             opening_hours.append(OpeningHours(
-                True, match.group(1), match.group(2)))
+                True, convert_to_am_pm(match.group(1)), convert_to_am_pm(match.group(2))))
         else:
             opening_hours.append(OpeningHours(False, DEFAULT_OPENING_TIME, DEFAULT_CLOSING_TIME))
     return WeeklyOpeningHours(opening_hours)

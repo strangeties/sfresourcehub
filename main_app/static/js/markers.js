@@ -29,7 +29,7 @@ const category_names = [
 const card_prefix_html = `
 <div class="card col shadow p-3 m-2 bg-white"
      id="card">
-     <div class="card-content">`
+     <div>`
 
 const card_suffix_html = `</div></div>`
 
@@ -50,13 +50,14 @@ function initMap() {
 
     var contentString = `
         <div class='resource_name'>${resource.resource_name}</div>
-        <div class='resource_street'>offered by <div class="bold" style="display:inline;">${resource.org_name}</div></div>
+        <div class='resource_notes'>offered by <div class="bold" style="display:inline;">${resource.org_name}</div></div>
         <br>
-        <div class='resource_street'>${resource.hrs}</div>
+        <div class='resource_street'>opening hours:${resource.hrs}</div>
         <div class='resource_street'>${resource.address}</div>
         <div class='resource_street'>${resource.phone}</div>
-        <div class='resource_notes'>${resource.notes}</div>
-        <div class='resource_notes'><a href='${resource.link}'>${resource.link}</a></div>`;
+        <div class='resource_notes'><a href='${resource.link}'>${resource.link}</a></div>
+        <br>
+        <div class='resource_notes'>${resource.notes}</div>`;
 
     var infoWindow = new google.maps.InfoWindow({
       content: contentString,
@@ -90,7 +91,7 @@ function initMap() {
   for (category in tables_by_category) {
     var div = document.createElement('div');
     div.style.width = '100%';
-    div.className = "row m-4";
+    div.className = "row m-4 shadow-sm";
     
     var title_div = document.createElement('div');
     title_div.style = 'width:100%';

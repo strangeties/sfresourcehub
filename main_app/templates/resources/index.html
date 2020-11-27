@@ -47,8 +47,6 @@
           {% for key, value in resource.opening_hours.opening_hours.items %}
            if ("{{value.enabled}}" == "True") {
              opening_hours += "<li>{{key}}: {{value.opening_time}} - {{value.closing_time}}</li>"
-           } else {
-             opening_hours += "<li>{{key}}: closed</li>"
            }
           {% endfor %}
         opening_hours += "\n<ul>"
@@ -76,31 +74,7 @@
       <h1 class="m-2">All Resources</h1>
     </div>
     <div class="row m-1 shadow-sm" id="map"></div>
-    <br>
     <div class="row m-1" style="width:100%;" id="resource_listings">
-<!---
-    {% for resource in resources %}
-        {% if request.user %}
-            <a href="{% url 'detail' resource.id %}">
-        {% endif %}
-        <div
-         class="card shadow p-3 m-2 bg-white text-center"
-         id="card"
-         style="">
-            <div class="card-content">
-              <div class='resource_name'>{{resource.resource_name}}</div>
-              <div class='resource_street'>offered by <div class="bold" style="display:inline;">{{resource.org_name}}</div></div>
-              <br>
-              <div class='resource_street'>{{resource.hrs}}</div>
-              <div class='resource_street'>{{resource.address}}</div>
-              <div class='resource_street'>{{resource.phone}}</div>
-              <div class='resource_notes'>{{resource.notes}}</div>
-            </div>
-        </div>
-        </a>
-    {% endfor %}
---->
-    {% endblock %}
-    </div>
   </body>
 </html>
+{% endblock %}
