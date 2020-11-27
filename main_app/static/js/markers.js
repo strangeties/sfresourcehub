@@ -23,7 +23,7 @@ const category_names = [
   "Shelter",
   "Women and Children",
   "Mental Health Services",
-  "Medical Assistance",
+  "Medical Assistance"
 ];
 
 function initMap() {
@@ -41,10 +41,12 @@ function initMap() {
     var category =
       category_index == -1 ? "------" : `--- ${category_names[category_index]} ---`;
 
-    var contentString = `<div class='resource_category'>${category}</div>
-        <div class='resource_org_name'>${resource.org_name}</div>
-        <div class='resource_street'>${resource.address}</div>
+    var contentString = `
+        <div class='resource_name'>${resource.resource_name}</div>
+        <div class='resource_street'>offered by <div class="bold" style="display:inline;">${resource.org_name}</div></div>
+        <br>
         <div class='resource_street'>${resource.hrs}</div>
+        <div class='resource_street'>${resource.address}</div>
         <div class='resource_street'>${resource.phone}</div>
         <div class='resource_notes'>${resource.notes}</div>
         <div class='resource_notes'><a href='${resource.link}'>${resource.link}</div>`;

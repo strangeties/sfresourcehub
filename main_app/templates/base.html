@@ -27,7 +27,7 @@
   <body>
     <div class="container-fluid">
       <nav
-        class="navbar navbar-expand-lg navbar-light ml-auto"
+        class="navbar navbar-expand-lg navbar-light ml-auto shadow"
         style="background-color:#FFFFFF"
       >
         <button
@@ -42,30 +42,30 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-          <a class="navbar-brand" style="font-family: sentinel;" href="https://www.stanthonysf.org/">
+          <a class="navbar-brand darken-on-hover" style="font-family: sentinel;" href="https://www.stanthonysf.org/">
             <img src="{% static 'images/logo_60x163.png' %}"
              class="img-fluid img-center"
              style="width:320px; object-fit:cover;">
           </a>
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="/">Home</a>
+              <a class="nav-link menu-darken-on-hover" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'home' %}#about">About</a>
+              <a class="nav-link menu-darken-on-hover" href="{% url 'home' %}#about">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'home' %}#browse-resources"
+              <a class="nav-link menu-darken-on-hover" href="{% url 'home' %}#browse-resources"
                 >Browse Resources</a
               >
             </li>
             <li>
-              <a class="nav-link" href="/contact" role="button"
+              <a class="nav-link menu-darken-on-hover" href="/contact" role="button"
           >Contact Us</a>
             </li>
             {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'resources_create' %}"
+              <a class="nav-link menu-darken-on-hover" href="{% url 'resources_create' %}"
                 >Manage Resources</a
               >
             </li>
