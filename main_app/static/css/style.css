@@ -17,6 +17,20 @@
   font-family: 'avenir-black';
 }
 
+.darken-on-hover:hover {
+  opacity:0.7;
+}
+
+.btn-home-resources {
+  background-color:#F8CD7F;
+  color:#6E645C;
+}
+
+.btn-home-resources:hover {
+  background-color:#F8CD7F;
+  color:#6E645C;
+}
+
 .container-fluid {
   padding-right: 0;
   padding-left: 0;
