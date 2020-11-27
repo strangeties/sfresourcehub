@@ -2,30 +2,6 @@
 
 const tenderloinLatLng = { lat:37.7847, lng:-122.4145 };
 
-const categories = [
-  "FOOD",
-  "CLOTHING",
-  "ADDICTION_RECOVERY",
-  "HYGIENE",
-  "FINANCIAL_EMPOWERMENT",
-  "SHELTER",
-  "WOMEN_AND_CHILDREN",
-  "MENTAL_HEALTH_SERVICES",
-  "MEDICAL_ASSISTANCE"
-];
-
-const category_names = [
-  "Food",
-  "Clothing",
-  "Addiction Recovery",
-  "Hygiene",
-  "Financial Empowerment",
-  "Shelter",
-  "Women and Children",
-  "Mental Health Services",
-  "Medical Assistance"
-];
-
 const card_prefix_html = `
 <div class="card col shadow p-3 m-2 bg-white"
      id="card">

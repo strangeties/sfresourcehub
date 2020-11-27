@@ -25,6 +25,7 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfXa-qMJ4xi6DKVaa_N_xsPSXWq2YKEyA&callback=initMap&libraries=drawing&v=weekly"
       defer
     ></script>
+    <script src="{% static 'js/resources.js' %}"></script>
     <script>
         const icons = [
         "{% static 'images/icons/food.gif' %}",
@@ -38,40 +39,48 @@
         "{% static 'images/icons/medical_assistance.gif' %}"
       ];
 
-        const default_icon = "{% static 'images/icons/default.gif' %}"
+      const default_icon = "{% static 'images/icons/default.gif' %}"
 
-        resources_from_database = []
+      resources_from_database = []
+
+      var {title, passlist_categories} = getTitleAndPasslistFromUrlParams();
 
       {% for resource in resources %}
-        opening_hours = "<ul>"
-          {% for key, value in resource.opening_hours.opening_hours.items %}
-           if ("{{value.enabled}}" == "True") {
-             opening_hours += "<li>{{key}}: {{value.opening_time}} - {{value.closing_time}}</li>"
-           }
-          {% endfor %}
-        opening_hours += "\n<ul>"
+        if (passlist_categories.includes("{{resource.category}}")) {
+          opening_hours = "<ul>"
+            {% for key, value in resource.opening_hours.opening_hours.items %}
+             if ("{{value.enabled}}" == "True") {
+               opening_hours += "<li>{{key}}: {{value.opening_time}} - {{value.closing_time}}</li>"
+             }
+            {% endfor %}
+          opening_hours += "\n<ul>"
 
-        r = {
-          resource_name: "{{resource.resource_name}}",
-          org_name: "{{resource.org_name}}",
-          category: "{{resource.category}}",
-          hrs: opening_hours,
-          link: "{{resource.url}}",
-          notes: "{{resource.notes}}",
-          address: "{{resource.address}}",
-          lat: "{{resource.lat}}",
-          long: "{{resource.long}}",
-          phone: "{{resource.phone}}",
+          r = {
+            resource_name: "{{resource.resource_name}}",
+            org_name: "{{resource.org_name}}",
+            category: "{{resource.category}}",
+            hrs: opening_hours,
+            link: "{{resource.url}}",
+            notes: "{{resource.notes}}",
+            address: "{{resource.address}}",
+            lat: "{{resource.lat}}",
+            long: "{{resource.long}}",
+            phone: "{{resource.phone}}",
+          }
+          resources_from_database.push(r)
         }
-        resources_from_database.push(r)
       {% endfor %}
+
+      window.addEventListener("DOMContentLoaded", function() {
+        var page_title = document.getElementById("page_title");
+        page_title.innerHTML = title;
+      }, false);
     </script>
-    <script src="{% static 'js/resources.js' %}"></script>
     <script src="{% static 'js/markers.js' %}"></script>
   </head>
   <body>
     <div class="row m-1 align-items-center" style="">
-      <h1 class="m-2">All Resources</h1>
+      <h1 class="m-2" id="page_title">All Resources</h1>
     </div>
     <div class="row m-1 shadow-sm" id="map"></div>
     <div class="row m-1" style="width:100%;" id="resource_listings">
