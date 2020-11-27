@@ -28,7 +28,7 @@
     <div class="container-fluid">
       <nav
         class="navbar navbar-expand-lg navbar-light ml-auto"
-        style="background-color: #1ce;"
+        style="background-color:#FFFFFF"
       >
         <button
           class="navbar-toggler"
@@ -49,32 +49,32 @@
           </a>
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-              <a class="nav-link text-white" href="/">Home</a>
+              <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="{% url 'about' %}">About</a>
+              <a class="nav-link" href="{% url 'about' %}">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="{% url 'index' %}"
+              <a class="nav-link" href="{% url 'index' %}"
                 >View All Resources</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="{% url 'category' %}"
+              <a class="nav-link" href="{% url 'category' %}"
                 >Find Resources By Category</a
               >
             </li>
             <li>
-              <a class="nav-link text-white" href="/contact" role="button"
+              <a class="nav-link" href="/contact" role="button"
           >Contact Us</a>
             </li>
             {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link text-white" href="{% url 'resources_create' %}"
+              <a class="nav-link" href="{% url 'resources_create' %}"
                 >Add Resource</a
               >
             </li>
-            <li class="nav-item"><a class="nav-link text-white" href="{% url 'myresource' %}">View My Resources</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'myresource' %}">View My Resources</a></li>
             <li class="nav-item">
               <a class="btn btn-info my-2" href="{% url 'logout' %}"
                 >Logout</a
@@ -82,7 +82,7 @@
             </li>
             {% else %}
             <li class="nav-item">
-              <a class="nav-link text-white" href="{% url 'signup' %}"
+              <a class="nav-link" href="{% url 'signup' %}"
                 >Sign Up</a
               >
             </li>
