@@ -17,18 +17,22 @@
   font-family: 'avenir-black';
 }
 
+.home-stanthonys, .home-stanthonys:hover {
+  color:#78291C;
+}
+
 .darken-on-hover:hover {
   opacity:0.6;
 }
 
 .btn-home-resources, .btn-home-resources:hover {
-  background-color:#F8CD7F;
-  color:#D77540;
+  background-color:#D77540;
+  color:#E9E9E9;
 }
 
 .btn-home-get-involved, .btn-home-get-involved:hover {
   background-color:#F8CD7F;
-  color:#6E645C;
+  color:#78291C;
 }
 
 .container-fluid {
