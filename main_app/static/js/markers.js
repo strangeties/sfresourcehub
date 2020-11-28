@@ -2,13 +2,6 @@
 
 const tenderloinLatLng = { lat:37.7847, lng:-122.4145 };
 
-const card_prefix_html = `
-<div class="card col shadow p-3 m-2 bg-white"
-     id="card">
-     <div>`
-
-const card_suffix_html = `</div></div>`
-
 var markers = [];
 var infoWindows = [];
 
@@ -27,19 +20,27 @@ function initMap() {
     var category =
       category_index == -1 ? "Unknown Category" : category_names[category_index];
 
-    var contentString = `
+    var commonContentString = `
         <div class='resource_name'>${resource.resource_name}</div>
         <div class='resource_notes'>offered by <div class="bold" style="display:inline;">${resource.org_name}</div></div>
         <br>
         <div class='resource_street'>opening hours:${resource.hrs}</div>
-        <div class='resource_street'>${resource.address}</div>
+        <div class='resource_street'>${resource.address}</div>`;
+ 
+    var infoWindowContentString = `
+        <div class="info-window">
+        <a href="#card${resource.id}">${commonContentString}</a>
+        </div>`;
+
+    var listingContentString = `
+        ${commonContentString}
+        <div class='resource_street'><a href='${resource.link}'>${resource.link}</a></div>
         <div class='resource_street'>${resource.phone}</div>
-        <div class='resource_notes'><a href='${resource.link}'>${resource.link}</a></div>
         <br>
-        <div class='resource_notes'>${resource.notes}</div>`;
+        <div class='resource_street'>${resource.notes}</div>`;
 
     var infoWindow = new google.maps.InfoWindow({
-      content: contentString,
+      content: infoWindowContentString,
     });
 
     var marker = new google.maps.Marker({
@@ -55,7 +56,12 @@ function initMap() {
     if (!(category in tables_by_category)) {
       tables_by_category[category] = '';
     }
-    tables_by_category[category] = tables_by_category[category] + card_prefix_html + contentString + card_suffix_html;
+    tables_by_category[category] = `
+        ${tables_by_category[category]}
+        <div class="card col shadow p-3 m-2 bg-white"
+         id="card${resource.id}" >
+         <div>${listingContentString}</div>
+        </div>`;
   }
 
   // Specifies info window and marker behavior.
@@ -109,5 +115,4 @@ function initMap() {
     div.appendChild(listings_div);
     tableRef.appendChild(div);
   }
-
 }
