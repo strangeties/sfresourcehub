@@ -46,7 +46,7 @@
       var {title, passlist_categories} = getTitleAndPasslistFromUrlParams();
 
       {% for resource in resources %}
-        if (passlist_categories.includes("{{resource.category}}")) {
+        if (passlist_categories.length < 1 || passlist_categories.includes("{{resource.category}}")) {
           opening_hours = "<ul>"
             {% for key, value in resource.opening_hours.opening_hours.items %}
              if ("{{value.enabled}}" == "True") {

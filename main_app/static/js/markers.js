@@ -67,7 +67,7 @@ function initMap() {
   for (category in tables_by_category) {
     var div = document.createElement('div');
     div.style.width = '100%';
-    div.className = "row m-4 shadow-sm";
+    div.className = "row m-4";
     
     var title_div = document.createElement('div');
     title_div.style = 'width:100%';
