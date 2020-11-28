@@ -9,6 +9,9 @@ const card_prefix_html = `
 
 const card_suffix_html = `</div></div>`
 
+var markers = [];
+var infoWindows = [];
+
 function initMap() {
   var map = new google.maps.Map(document.getElementById("map"), {
     center: tenderloinLatLng,
@@ -46,16 +49,8 @@ function initMap() {
       title: resource.resource_name,
     });
 
-    google.maps.event.addListener(
-      marker,
-      "click",
-      (function (marker, contentString, infowWindow) {
-        return function () {
-          infowWindow.setContent(contentString);
-          infowWindow.open(map, marker);
-        };
-      })(marker, contentString, infoWindow)
-    );
+    markers.push(marker);
+    infoWindows.push(infoWindow);
 
     if (!(category in tables_by_category)) {
       tables_by_category[category] = '';
@@ -63,6 +58,36 @@ function initMap() {
     tables_by_category[category] = tables_by_category[category] + card_prefix_html + contentString + card_suffix_html;
   }
 
+  // Specifies info window and marker behavior.
+  for (var i = 0; i < markers.length; i++) {
+    var marker = markers[i];
+    google.maps.event.addListener(
+      marker,
+      "click",
+      (function (marker, i) {
+        return function () {
+          // Closes every other info window.
+          for (var j = 0; j < markers.length; j++) {
+            if (i === j) {
+              continue;
+            }
+            infoWindows[j].close();
+            markers[j].open = false;
+          }
+          // Adjusts window of interest.
+          if (marker.open) {
+            infoWindows[i].close();
+            marker.open = false;
+          } else {
+            infoWindows[i].open(map, marker);
+            marker.open = true;
+          }
+        };
+      })(marker, i)
+    );
+  }
+
+  // Adds listings.
   var tableRef = document.getElementById("resource_listings");
   for (category in tables_by_category) {
     var div = document.createElement('div');
