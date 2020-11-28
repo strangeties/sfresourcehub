@@ -72,15 +72,122 @@
     </script>
 </head>
 
-<h1>Add Resources</h1>
+<body>
+<div class="row m-1 align-items-center" style="">
+  <h1 class="m-2" id="page_title">Add Resources</h1>
+</div>
+
+<div class="m-2">
 <form method="post" nonvalidate>
   {% csrf_token %}
-  <table>
-  {{ form.as_table }}
-  </table>
+
+  {{ form.non_field_errors }}
+
+  <div class="row m-2">
+    {{ form.resource_name.errors }}
+    <div class="col-4">
+      <label for="{{ form.resource_name.id_for_label }}" class="form-label">Resource:</label>
+    </div>
+    <div class="col-8">
+      {{ form.resource_name }}
+    </div>
+  </div>
+
+  <div class="row m-2">
+    {{ form.org_name.errors }}
+    <div class="col-4">
+      <label for="{{ form.org_name.id_for_label }}" class="form-label">Organization:</label>
+    </div>
+    <div class="col-8">
+      {{ form.org_name }}
+    </div>
+  </div>
+
+  <div class="row m-2">
+    {{ form.category.errors }}
+    <div class="col-4">
+      <label for="{{ form.category.id_for_label }}" class="form-label">Category:</label>
+    </div>
+    <div class="col-8">
+      {{ form.category }}
+    </div>
+  </div>
+
+  <div class="row m-2">
+    {{ form.opening_hours.errors }}
+    <div class="col-4">
+      <label for="{{ form.opening_hours.id_for_label }}" class="form-label">Opening Hours:</label>
+    </div>
+    <div class="col-8">
+      {{ form.opening_hours }}
+    </div>
+  </div>
+
+  <div class="row m-2">
+    {{ form.phone.errors }}
+    <div class="col-4">
+      <label for="{{ form.phone.id_for_label }}" class="form-label">Phone Number:</label>
+    </div>
+    <div class="col-8">
+      {{ form.phone }}
+    </div>
+  </div>
+
+  <div class="row m-2">
+    {{ form.address.errors }}
+    <div class="col-4">
+      <label for="{{ form.address.id_for_label }}" class="form-label">Address:</label>
+    </div>
+    <div class="col-8">
+      {{ form.address }}
+    </div>
+  </div>
+
+  <!-- Hidden fields for address details -->
+  <div style="visibility:hidden;">
+    {{ form.street_number.errors }}
+    {{ form.street_number }}
+    {{ form.street_name.errors }}
+    {{ form.street_name }}
+    {{ form.city.errors }}
+    {{ form.city }}
+    {{ form.state.errors }}
+    {{ form.state }}
+    {{ form.country.errors }}
+    {{ form.country }}
+    {{ form.postal_code.errors }}
+    {{ form.postal_code }}
+    {{ form.lat.errors }}
+    {{ form.lat }}
+    {{ form.long.errors }}
+    {{ form.long }}
+  </div>
+
+  <div class="row m-2">
+    {{ form.url.errors }}
+    <div class="col-4">
+      <label for="{{ form.url.id_for_label }}" class="form-label">Url:</label>
+    </div>
+    <div class="col-8">
+      {{ form.url }}
+    </div>
+  </div>
+ 
+  <div class="row m-2">
+    {{ form.notes.errors }}
+    <div class="col-4">
+      <label for="{{ form.notes.id_for_label }}" class="form-label">Notes:</label>
+    </div>
+    <div class="col-8">
+      {{ form.notes }}
+    </div>
+  </div>
+
   <div class="form-actions">
-    <button type="submit">Send</button>
+    <button class="btn bold darken-on-hover btn-default shadow" type="submit">Send</button>
   </div>
 </form>
+</div>
+</body>
 
 {% endblock %}

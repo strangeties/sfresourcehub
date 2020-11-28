@@ -39,6 +39,16 @@
   color:#6EB2BD;
 }
 
+.btn-default, .btn-default:hover {
+  background-color:#D77540;
+  color:#E9E9E9;
+}
+
+.form-label {
+  vertical-align: top;
+  color:#00AECB !important;  
+}
+
 .container-fluid {
   padding-right: 0;
   padding-left: 0;
@@ -62,9 +72,8 @@ form {
 }
 
 th {
-  padding-right: 20px;
   vertical-align: top;
-  text-align: top;
+  color:#00AECB;
 }
 
 .update {

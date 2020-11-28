@@ -41,8 +41,3 @@ body {
   color: var(--main-text-color);
   font-size: x-small;
 }
-
-td.resource {
-  padding: 8px;
-  background: -webkit-radial-gradient(circle, #f5f5dc, #ffffff);
-}
