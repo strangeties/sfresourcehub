@@ -4,9 +4,23 @@ const tenderloinLatLng = { lat:37.7847, lng:-122.4145 };
 
 var markers = [];
 var infoWindows = [];
+var map;
+
+function adjustViewportAndOpenInfoWindow(lat, long, i) {
+  map.setCenter({ lat:lat, lng: long });
+  for (var j = 0; j < markers.length; j++) {
+    if (i === j) {
+      markers[j].open = true;
+      infoWindows[j].open(map, markers[j])
+    } else {
+      markers[j].open = false;
+      infoWindows[j].close();
+    }
+  } 
+}
 
 function initMap() {
-  var map = new google.maps.Map(document.getElementById("map"), {
+  map = new google.maps.Map(document.getElementById("map"), {
     center: tenderloinLatLng,
     zoom: 16,
   });
@@ -42,7 +56,7 @@ function initMap() {
         <div class="align-div-to-bottom" style="width:100%;">
            <div class="shadow m-2">
            <a class="btn btn-resource-listing bold darken-on-hover" style="width:100%;"
-             href="#map"
+             href="#map" onclick="adjustViewportAndOpenInfoWindow(${resource.lat}, ${resource.long}, ${i})"
              role="button">View On Map</a>
            </div>
         </div>`;
