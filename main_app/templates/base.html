@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=false;"
     />
     <title>St.Anthony's Resource Hub</title>
     {% load static %}
@@ -20,7 +20,6 @@
       rel="stylesheet"
       href="{% static 'css/style.css' %}"
     />
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </head>
@@ -28,26 +27,25 @@
     <div class="container-fluid">
       <nav
         class="navbar navbar-expand-lg navbar-light ml-auto shadow"
-        style="background-color:#FFFFFF"
-      >
+        style="background-color:#FFFFFF">
         <button
-          class="navbar-toggler"
+          class="navbar-toggler collapsed"
           type="button"
           data-toggle="collapse"
-          data-target="#navbarTogglerDemo01"
-          aria-controls="navbarTogglerDemo01"
+          data-target="#navbarToggler"
+          aria-controls="navbarToggler"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <div class="collapse navbar-collapse" id="navbarToggler">
           <a class="navbar-brand darken-on-hover" style="font-family: sentinel;" href="https://www.stanthonysf.org/">
             <img src="{% static 'images/logo_60x163.png' %}"
              class="img-fluid img-center"
              style="width:320px; object-fit:cover;">
           </a>
-          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <ul class="nav navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
               <a class="nav-link menu-darken-on-hover" href="/">Home</a>
             </li>
