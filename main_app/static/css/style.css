@@ -44,6 +44,17 @@
   color:#E9E9E9;
 }
 
+.btn-resource-listing, .btn-resource-listing:hover {
+  background-color:#D77540;
+  color:#E9E9E9;
+}
+
+div.align-div-to-bottom {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
 .form-label {
   vertical-align: top;
   color:#00AECB !important;  

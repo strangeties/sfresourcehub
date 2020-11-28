@@ -28,8 +28,8 @@ function initMap() {
         <div class='resource_street'>${resource.address}</div>`;
  
     var infoWindowContentString = `
-        <div class="info-window">
-        <a href="#card${resource.id}">${commonContentString}</a>
+        <div class="info-window darken-on-hover">
+        <a href="#card${resource.id}" style="text-decoration:none;">${commonContentString}</a>
         </div>`;
 
     var listingContentString = `
@@ -37,7 +37,15 @@ function initMap() {
         <div class='resource_street'><a href='${resource.link}'>${resource.link}</a></div>
         <div class='resource_street'>${resource.phone}</div>
         <br>
-        <div class='resource_street'>${resource.notes}</div>`;
+        <div class='resource_street' style='height:auto;'>${resource.notes}</div>
+        <br>
+        <div class="align-div-to-bottom" style="width:100%;">
+           <div class="shadow m-2">
+           <a class="btn btn-resource-listing bold darken-on-hover" style="width:100%;"
+             href="#map"
+             role="button">View On Map</a>
+           </div>
+        </div>`;
 
     var infoWindow = new google.maps.InfoWindow({
       content: infoWindowContentString,
@@ -58,7 +66,8 @@ function initMap() {
     }
     tables_by_category[category] = `
         ${tables_by_category[category]}
-        <div class="card col shadow p-3 m-2 bg-white"
+        <div class="card col-auto shadow p-3 m-2 bg-white"
+         style="height:100%;"
          id="card${resource.id}" >
          <div>${listingContentString}</div>
         </div>`;
