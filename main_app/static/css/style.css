@@ -60,6 +60,14 @@ div.align-div-to-bottom {
   color:#00AECB !important;  
 }
 
+a[aria-expanded=true] .manage-plus {
+   display: none;
+}
+
+a[aria-expanded=false] .manage-minus {
+   display: none;
+}
+
 .container-fluid {
   padding-right: 0;
   padding-left: 0;

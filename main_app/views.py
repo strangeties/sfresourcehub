@@ -23,6 +23,10 @@ def resources_index(request):
     resources = Resource.objects.all()
     return render(request, 'resources/index.html', {'resources': resources})
 
+def manage_resources(request):
+    resources = Resource.objects.all()
+    return render(request, 'resources/manage.html', {'resources': resources})
+
 def resourceView(request):
     error_message = ''
     if request.method == 'POST':
