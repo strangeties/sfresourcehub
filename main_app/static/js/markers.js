@@ -23,6 +23,7 @@ function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: tenderloinLatLng,
     zoom: 16,
+    mapId: 'cce853939880394f'
   });
 
   var tables_by_category = {};
