@@ -50,7 +50,7 @@ def resourceView(request):
                          url=form.cleaned_data['url'],
                          notes=form.cleaned_data['notes'])
             r.save()
-            return redirect('index')
+            return redirect('resources_manage')
         else:
             print('!form.is_valid')
             print(form.errors)
@@ -84,7 +84,6 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
-
 
 def contactView(request):
     if request.method == 'GET':
@@ -143,9 +142,13 @@ class ResourceUpdate(LoginRequiredMixin, UpdateView):
     model = Resource
     form_class = AddResourceForm
 
+    def get_success_url(self):
+      pk = self.kwargs["pk"];
+      return '/manage_resources?id=%d#card%d'%(pk, pk);
+
 class ResourceDelete(LoginRequiredMixin, DeleteView):
     model = Resource
-    success_url = '/resources/'
+    success_url = '/manage_resources'
 
 @login_required
 def myresources(request):

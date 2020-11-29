@@ -13,18 +13,9 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="{% static 'css/styles.css' %}"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
       href="{% static 'css/markers.css' %}"
     />
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfXa-qMJ4xi6DKVaa_N_xsPSXWq2YKEyA&map_ids=cce853939880394f&callback=initMap&libraries=drawing&v=weekly"
-      defer
-    ></script>
     <script>
       opening_hours_map = {};
 
@@ -48,9 +39,35 @@
           tableRef.innerHTML = opening_hours_map[id];
         }
       }
+
+      function expand_id() {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const id = urlParams.get('id')
+        if (id == null) {
+          return;
+        }
+        var toggle = document.getElementById('expandable' + id);
+        if (toggle == null) {
+          return;
+        }
+        var card = document.getElementById('card' + id);
+        if (card == null) {
+          return;
+        }
+        toggle.setAttribute('aria-expanded', true);
+        toggle.setAttribute('class', '');
+        card.setAttribute('class', card.getAttribute('class') + 'show');
+        console.log(el)
+      }
+
+      function run_on_load() {
+        set_opening_hours();
+        expand_id();
+      }
     </script>
   </head>
-  <body onload="set_opening_hours()">
+  <body onload="run_on_load()">
     <div class="row m-1 align-items-center">
       <h1 class="m-2" id="page_title">Manage Resources</h1>
     </div>
@@ -66,9 +83,9 @@
       <div class="row m-3" id="resource_listings">
         {% for resource in resources %}
           <div class="row m-1 shadow-sm" style="width:100%;">
-            <a data-toggle="collapse" 
+            <a data-toggle="collapse" id="expandable{{resource.id}}" 
              href="#card{{resource.id}}" role="button" aria-expanded="false" aria-controls="card{{resource.id}}"
-             style="width:100%;">
+             style="width:100%;" class="collapsed">
               <div class="row" style="width:10">
                 <div class="col m-2 col-3">{{resource.resource_name}}</div>
                 <div class="col m-2 col-3">{{resource.category}}</div>

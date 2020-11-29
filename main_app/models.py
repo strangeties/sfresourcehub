@@ -42,7 +42,6 @@ def convert_to_24_hour(value):
         return value
 
 def parse_weekly_opening_hours(value):
-    print("parse_weekly_opening_hours" + value)
     opening_hours = []
     for weekday in WEEKDAYS:
         match = re.search(
