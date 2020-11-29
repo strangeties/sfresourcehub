@@ -32,6 +32,15 @@ def convert_to_am_pm(value):
   
     return str(hr) + ':' + values[1] + ' ' + tag;
 
+def convert_to_24_hour(value, default):
+    match = re.search('([0-9]+):([0-9]+) (am|pm)', value)
+    if match:
+        hr = int(match.group(1))
+        hr = 0 if (hr == 12 and match.group(3) == 'am') else (hr + 12 if match.group(3) == 'pm' else hr);
+        return '%01d:%s'%(hr, match.group(2));
+    else:
+        return default
+
 def parse_weekly_opening_hours(value):
     opening_hours = []
     for weekday in WEEKDAYS:
@@ -43,7 +52,6 @@ def parse_weekly_opening_hours(value):
         else:
             opening_hours.append(OpeningHours(False, DEFAULT_OPENING_TIME, DEFAULT_CLOSING_TIME))
     return WeeklyOpeningHours(opening_hours)
-
 
 class WeeklyOpeningHoursField(models.Field):
     def __init__(self, *args, **kwargs):
