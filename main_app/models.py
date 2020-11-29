@@ -32,14 +32,14 @@ def convert_to_am_pm(value):
   
     return str(hr) + ':' + values[1] + ' ' + tag;
 
-def convert_to_24_hour(value, default):
+def convert_to_24_hour(value):
     match = re.search('([0-9]+):([0-9]+) (am|pm)', value)
     if match:
         hr = int(match.group(1))
         hr = 0 if (hr == 12 and match.group(3) == 'am') else (hr + 12 if match.group(3) == 'pm' else hr);
         return '%01d:%s'%(hr, match.group(2));
     else:
-        return default
+        return value
 
 def parse_weekly_opening_hours(value):
     opening_hours = []
@@ -82,9 +82,9 @@ class WeeklyOpeningHoursField(models.Field):
         opening_hours_str_list = []
         for weekday in WEEKDAYS:
             if value.opening_hours[weekday].enabled:
-                opening_hours_str_list.append('%s %s %s' % (weekday,
-                                                            value.opening_hours[weekday].opening_time,
-                                                            value.opening_hours[weekday].closing_time))
+                opening_hours_str_list.append('(%s %s %s)' % (weekday,
+                                                              convert_to_24_hour(value.opening_hours[weekday].opening_time),
+                                                              convert_to_24_hour(value.opening_hours[weekday].closing_time)))
         return ''.join(opening_hours_str_list)
 
     def get_db_prep_value(self, value, connection, prepared=False):

@@ -147,14 +147,12 @@ class ResourceDelete(LoginRequiredMixin, DeleteView):
     model = Resource
     success_url = '/resources/'
 
-
 @login_required
 def myresources(request):
     myresources = Resource.objects.filter(user=request.user)
     return render(request, 'resources/myindex.html', {
         'myresources': myresources,
     })
-
 
 def resources_categories(request):
     return render(request, 'categories.html')
