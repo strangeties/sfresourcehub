@@ -37,11 +37,12 @@ def convert_to_24_hour(value):
     if match:
         hr = int(match.group(1))
         hr = 0 if (hr == 12 and match.group(3) == 'am') else (hr + 12 if match.group(3) == 'pm' else hr);
-        return '%01d:%s'%(hr, match.group(2));
+        return '%02d:%s'%(hr, match.group(2));
     else:
         return value
 
 def parse_weekly_opening_hours(value):
+    print("parse_weekly_opening_hours" + value)
     opening_hours = []
     for weekday in WEEKDAYS:
         match = re.search(
