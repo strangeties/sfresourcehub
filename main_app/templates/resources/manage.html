@@ -86,24 +86,38 @@
               </div>
             </a>
             <div class="collapse" id="card{{resource.id}}" style="width:100%;">
-              <div class="m-2 border" style="">
-                <div class='row m-1 resource_name'>{{resource.resource_name}}</div>
-                <div class='row m-1 resource_notes'>offered by &nbsp;<div class="bold" style="display:inline;">{{resource.org_name}}</div></div>
-                <br>
-                <div class='row m-1 resource_street'>opening hours:<div id='opening_hours{{resource.id}}'></div></div>
-                <div class='row m-1 resource_street'>
-                  <a href='https://maps.google.com/?q={{resource.lat}},{{resource.long}}' style="text-decoration:none;">
-                    {{resource.address}}
-                  </a>
+              <div class="row m-2 border">
+                <div class="col m-2">
+                  <div class='row m-1 resource_name'>{{resource.resource_name}}</div>
+                  <div class='row m-1 resource_notes'>offered by &nbsp;<div class="bold" style="display:inline;">{{resource.org_name}}</div></div>
+                  <br>
+                  <div class='row m-1 resource_street'>opening hours:<div id='opening_hours{{resource.id}}'></div></div>
+                  <div class='row m-1 resource_street'>
+                    <a href='https://maps.google.com/?q={{resource.lat}},{{resource.long}}' style="text-decoration:none;">
+                      {{resource.address}}
+                    </a>
+                  </div>
+                  <div class='row m-1 resource_street'>{{resource.phone}}</div>
+                  <div class='row m-1 resource_street'>
+                    <a href='${resource.url}' style="text-decoration:none;">
+                      {{resource.url}}
+                    </a>
+                  </div>
+                  <br>
+                  <div class='row m-1 resource_street' style='height:auto;'>{{resource.notes}}</div>
                 </div>
-                <div class='row m-1 resource_street'>{{resource.phone}}</div>
-                <div class='row m-1 resource_street'>
-                  <a href='${resource.link}' style="text-decoration:none;">
-                    {{resource.link}}
-                  </a>
+                <div class="col m-2">
+                  <div class="row m-2 shadow-sm float-right">
+                    <a class="btn btn-delete bold darken-on-hover""
+                     href="{% url 'resources_delete' resource.id %}"
+                     role="button">Delete</a>
+                  </div>
+                  <div class="row m-2 shadow-sm float-right">
+                    <a class="btn btn-edit bold darken-on-hover""
+                    href="{% url 'resources_update' resource.id %}"
+                    role="button">Edit</a>
+                  </div>
                 </div>
-                <br>
-                <div class='row m-1 resource_street' style='height:auto;'>{{resource.notes}}</div>
               </div>
             </div>
           </div>
