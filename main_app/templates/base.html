@@ -66,6 +66,19 @@
             </li>
             {% endif %}
           </ul>
+          {% if user.is_authenticated %}
+          <div class="row m-2 shadow-sm">
+             <a class="btn btn-default bold darken-on-hover" style="width:100%;"
+             href="/logout"
+             role="button">Log Out</a>
+          </div>   
+          {% else %}
+          <div class="row m-2 shadow-sm">
+             <a class="btn btn-default bold darken-on-hover" style="width:100%;"
+             href="/login"
+             role="button">Log In</a>
+          </div>
+          {% endif %}
         </div>
       </nav>
       <div class="main">
