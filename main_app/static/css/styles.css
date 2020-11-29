@@ -1,7 +1,7 @@
 :root {
   --main-text-color: #6E645C;
   --resource-text-color: #00AECB;
-  --faint-text-color: #D77540;
+  --faint-text-color: #6EB2BD;
 }
 
 #map {
@@ -38,6 +38,6 @@ body {
 }
 
 .resource_notes {
-  color: var(--main-text-color);
+  color: var(--faint-text-color);
   font-size: x-small;
 }

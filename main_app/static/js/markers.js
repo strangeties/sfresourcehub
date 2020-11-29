@@ -38,26 +38,39 @@ function initMap() {
         <div class='resource_name'>${resource.resource_name}</div>
         <div class='resource_notes'>offered by <div class="bold" style="display:inline;">${resource.org_name}</div></div>
         <br>
-        <div class='resource_street'>opening hours:${resource.hrs}</div>
-        <div class='resource_street'>${resource.address}</div>`;
+        <div class='resource_street'>opening hours:${resource.hrs}</div>`;
  
     var infoWindowContentString = `
         <div class="info-window darken-on-hover">
-        <a href="#card${resource.id}" style="text-decoration:none;">${commonContentString}</a>
+          <a href="#card${resource.id}" style="text-decoration:none;">
+            ${commonContentString}
+            <div class='resource_street'>${resource.address}</div>
+            <br>
+            <div class='resource_notes text-center' style="width:100%; color:#6EB2BD;">Click for listing details</div>
+          </a>
         </div>`;
 
     var listingContentString = `
         ${commonContentString}
-        <div class='resource_street'><a href='${resource.link}'>${resource.link}</a></div>
+        <div class='resource_street'>
+          <a href='https://maps.google.com/?q=${resource.lat},${resource.long}' style="text-decoration:none;">
+            ${resource.address}
+          </a>
+        </div>
         <div class='resource_street'>${resource.phone}</div>
+        <div class='resource_street'>
+          <a href='${resource.link}' style="text-decoration:none;">
+            ${resource.link}
+          </a>
+        </div>
         <br>
         <div class='resource_street' style='height:auto;'>${resource.notes}</div>
         <br>
         <div class="align-div-to-bottom" style="width:100%;">
            <div class="shadow m-2">
-           <a class="btn btn-resource-listing bold darken-on-hover" style="width:100%;"
-             href="#map" onclick="adjustViewportAndOpenInfoWindow(${resource.lat}, ${resource.long}, ${i})"
-             role="button">View On Map</a>
+             <a class="btn btn-resource-listing bold darken-on-hover" style="width:100%;"
+              href="#map" onclick="adjustViewportAndOpenInfoWindow(${resource.lat}, ${resource.long}, ${i})"
+              role="button">View On Map</a>
            </div>
         </div>`;
 
