@@ -69,7 +69,7 @@
   </head>
   <body onload="run_on_load()">
     <div class="row m-1 align-items-center">
-      <h1 class="m-2" id="page_title">Manage Resources</h1>
+      <h1 class="m-2" id="page_title">Manage My Resources</h1>
     </div>
 
     <div class="row m-5 shadow-sm" style="display:inline-block;">
@@ -123,14 +123,15 @@
                   <br>
                   <div class='row m-1 resource_street' style='height:auto;'>{{resource.notes}}</div>
                 </div>
-                <div class="col m-2">
+                <div class="col m-2" id="buttons{{resource.id}}">
+                  <!-- todo: render delete confirmation on the manage page --> 
                   <div class="row m-2 shadow-sm float-right">
-                    <a class="btn btn-delete bold darken-on-hover""
+                    <a class="btn btn-delete bold darken-on-hover"
                      href="{% url 'resources_delete' resource.id %}"
                      role="button">Delete</a>
                   </div>
                   <div class="row m-2 shadow-sm float-right">
-                    <a class="btn btn-edit bold darken-on-hover""
+                    <a class="btn btn-edit bold darken-on-hover"
                     href="{% url 'resources_update' resource.id %}"
                     role="button">Edit</a>
                   </div>
