@@ -54,7 +54,7 @@ function initMap() {
     var listingContentString = `
         ${commonContentString}
         <div class='resource_street'>
-          <a href='https://maps.google.com/?q=${resource.lat},${resource.long}' style="text-decoration:none;">
+          <a href='https://maps.google.com/?q=${resource.lat},${resource.long}' style="text-decoration:none; flex:1;">
             ${resource.address}
           </a>
         </div>
@@ -65,7 +65,8 @@ function initMap() {
           </a>
         </div>
         <br>
-        <div class='resource_street' style='height:auto;'>${resource.notes}</div>
+        <div class='resource_street' style=''>${resource.notes}</div>
+        <br>
         <br>
         <div class="align-div-to-bottom" style="width:100%;">
            <div class="shadow m-2">
@@ -95,9 +96,9 @@ function initMap() {
     tables_by_category[category] = `
         ${tables_by_category[category]}
         <div class="card col-auto shadow p-3 m-2 bg-white"
-         style="height:100%;"
-         id="card${resource.id}" >
-         <div>${listingContentString}</div>
+         style="width:30vw;"
+         id="card${resource.id}" style="display:flex; flex-direction:column;">
+         <div style="">${listingContentString}</div>
         </div>`;
   }
 

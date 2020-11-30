@@ -44,6 +44,16 @@
   color:#E9E9E9;
 }
 
+.btn-delete, .btn-delete:hover {
+  background-color:#C33D31;
+  color:#E9E9E9;
+}
+
+.btn-edit, .btn-edit:hover {
+  background-color:#6E645C;
+  color:#E9E9E9;
+}
+
 .btn-resource-listing, .btn-resource-listing:hover {
   background-color:#D77540;
   color:#E9E9E9;
