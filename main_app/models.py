@@ -140,7 +140,8 @@ class Resource(models.Model):
     category = models.CharField(max_length=100,
                                 choices=CATEGORIES,
                                 default=UNKNOWN)
-
+    youth_only = models.BooleanField(default=False)
+    seniors_only = models.BooleanField(default=False)
     opening_hours = WeeklyOpeningHoursField()
     address = models.CharField(max_length=100, blank=True)
     street_number = models.CharField(max_length=100, blank=True)
@@ -155,8 +156,6 @@ class Resource(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     url = models.CharField(max_length=200, blank=True)
     notes = models.TextField(max_length=250, blank=True)
-    youth_only = models.BooleanField(default=False)
-    seniors_only = models.BooleanField(default=False)
 
     ordering = ['org_name', 'category', 'resource_name']
 
