@@ -155,6 +155,8 @@ class Resource(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     url = models.CharField(max_length=200, blank=True)
     notes = models.TextField(max_length=250, blank=True)
+    youth_only = models.BooleanField(default=False)
+    seniors_only = models.BooleanField(default=False)
 
     ordering = ['org_name', 'category', 'resource_name']
 

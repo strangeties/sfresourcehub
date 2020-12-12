@@ -173,3 +173,5 @@ class AddResourceForm(forms.ModelForm):
 
     url = forms.URLField(max_length=100, required=False)
     notes = forms.CharField(max_length=250, required=False)
+    youth_only = forms.BooleanField(widget=forms.CheckboxInput())
+    seniors_only = forms.BooleanField(widget=forms.CheckboxInput())
