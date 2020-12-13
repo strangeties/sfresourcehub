@@ -41,6 +41,9 @@
 
       const default_icon = "{% static 'images/icons/default.gif' %}"
 
+      const youth_only_icon = "{% static 'images/icons/youth.gif' %}"
+      const seniors_only_icon = "{% static 'images/icons/seniors.gif' %}"
+
       resources_from_database = []
 
       var {title, passlist_categories} = getTitleAndPasslistFromUrlParams();
@@ -59,6 +62,8 @@
             resource_name: "{{resource.resource_name}}",
             org_name: "{{resource.org_name}}",
             category: "{{resource.category}}",
+            youth_only: "{{resource.youth_only}}",
+            seniors_only: "{{resource.seniors_only}}",
             hrs: opening_hours,
             link: "{{resource.url}}",
             notes: "{{resource.notes}}",
