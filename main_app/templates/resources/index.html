@@ -46,10 +46,13 @@
 
       resources_from_database = []
 
-      var {title, passlist_categories} = getTitleAndPasslistFromUrlParams();
+      var {title, passlist_categories, for_youth, for_seniors} = getTitleAndPasslistFromUrlParams();
 
       {% for resource in resources %}
-        if (passlist_categories.length < 1 || passlist_categories.includes("{{resource.category}}")) {
+        if ((!for_youth && !for_seniors && passlist_categories.length < 1) ||
+            (!for_youth && !for_seniors && passlist_categories.includes("{{resource.category}}")) ||
+            (for_youth && '{{resource.youth_only}}' === 'True') ||
+            (for_seniors && '{{resource.seniors_only}}' === 'True')) {
           opening_hours = "<ul>"
             {% for key, value in resource.opening_hours.opening_hours.items %}
              if ("{{value.enabled}}" == "True") {
